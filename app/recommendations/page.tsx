@@ -1,8 +1,55 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Recommendations · Teaching Portfolio",
+  title: "References & Reviews · Teaching Portfolio",
 };
+
+const ratingCategories = [
+  "Time management",
+  "Creativity",
+  "Adherence to organization/school standards",
+  "Openness to constructive criticism",
+  "Communicates effectively",
+  "Maintains effective relationships with students and parents",
+  "Maintains effective relationships with peers and staff",
+  "Works well in a team environment",
+  "Perseveres through challenges and faces change with enthusiasm",
+  "Energized when challenged",
+  "Work Ethic",
+];
+
+const reviews = [
+  {
+    name: "Candace Baldwin",
+    relationship: "Supervisor",
+    wouldWorkAgain: true,
+    comment:
+      "I would work with Annalisa again in a heartbeat. Any student is lucky to have her as a teacher! She has thrived in so many different teaching environments and made each of them a great experience. She is a treasure!",
+    strengths: [
+      "Bringing organization and creativity together to create an interesting and engaging learning environment",
+      "Seeing places for optimization and thinking outside the box to make learning more effective",
+      "Connecting with both students and staff to make sure the needs of everyone are being met",
+    ],
+    improvement:
+      "It is hard for her to accept that some parents or organizations do not want the optimal level of learning but rather the lowest amount of effort. In these cases it is difficult for her to adapt to a lower standard of learning.",
+    concerns: false,
+  },
+  {
+    name: "Devin Sundry",
+    relationship: "Co-worker (10+ years)",
+    wouldWorkAgain: true,
+    comment:
+      "Annalisa is easily the best coworker I have ever had the pleasure of working with. I would happily work with her in any capacity. She is knowledgeable, supportive and dedicated to her role. Anyone who knows her or has ever worked with her, including past students, would say the same thing. If you want someone who can manage any situation in the classroom no matter how big, she is the one you want. She is an incredible teacher and someone anyone would want on staff.",
+    strengths: [
+      "Subject Knowledge — not only does she know her subject matter as close to perfect as humanly possible, but she is always striving to learn more about it, constantly seeking new ways to improve",
+      "Organizational Skills — her ability to effectively manage time and resources, prioritize responsibilities, and achieve goals is second to none; if a system doesn't exist, she creates one",
+      "Dedication to her classroom — she is always there for anyone who wants to learn, needs guidance, or just a little extra time, and that mindset extends to her colleagues as well",
+    ],
+    improvement:
+      "Work/Life Balance. Annalisa is someone who puts as much time into work as is needed. I have seen her grade into the night and on weekends to stay on top of her responsibilities. She prioritizes work and is driven to stay as far ahead as possible.",
+    concerns: false,
+  },
+];
 
 const letters = [
   {
@@ -51,56 +98,151 @@ const letters = [
   },
 ];
 
-export default function RecommendationsPage() {
+export default function ReferencesPage() {
   return (
     <div className="mx-auto max-w-4xl px-6 py-20">
       <header className="mb-14">
-        <h1 className="text-4xl font-bold tracking-tight">Recommendations</h1>
+        <h1 className="text-4xl font-bold tracking-tight">References & Reviews</h1>
         <p className="mt-4 max-w-xl text-zinc-500 leading-relaxed">
-          Letters of recommendation from colleagues, supervisors, and professional
-          contacts who have observed my teaching firsthand.
+          Structured evaluations and letters of recommendation from supervisors,
+          colleagues, and professional contacts who have observed my teaching firsthand.
         </p>
       </header>
 
-      <div className="space-y-12">
-        {letters.map(({ name, title, institution, context, pullQuote, body, closing }) => (
-          <article
-            key={name}
-            className="rounded-2xl border border-zinc-200 overflow-hidden"
-          >
-            {/* Header */}
-            <div className="bg-zinc-50 border-b border-zinc-100 px-8 py-5 flex flex-wrap items-start justify-between gap-3">
-              <div>
-                <p className="font-semibold text-zinc-900">{name}</p>
-                <p className="text-sm text-zinc-500 mt-0.5">{title}</p>
-                <p className="text-sm text-zinc-400">{institution}</p>
+      {/* Structured Reviews */}
+      <section className="mb-16">
+        <h2 className="text-xl font-semibold mb-6">Peer & Supervisor Evaluations</h2>
+        <div className="space-y-10">
+          {reviews.map(({ name, relationship, wouldWorkAgain, comment, strengths, improvement, concerns }) => (
+            <article key={name} className="rounded-2xl border border-zinc-200 overflow-hidden">
+              {/* Header */}
+              <div className="bg-zinc-50 border-b border-zinc-100 px-8 py-5 flex flex-wrap items-start justify-between gap-3">
+                <div>
+                  <p className="font-semibold text-zinc-900">{name}</p>
+                  <p className="text-sm text-zinc-500 mt-0.5">{relationship}</p>
+                </div>
+                <div className="flex flex-wrap gap-2">
+                  {wouldWorkAgain && (
+                    <span className="rounded-full bg-emerald-50 border border-emerald-200 px-3 py-1 text-xs text-emerald-700 font-medium">
+                      Would work together again
+                    </span>
+                  )}
+                  {!concerns && (
+                    <span className="rounded-full bg-white border border-zinc-200 px-3 py-1 text-xs text-zinc-500 font-medium">
+                      No concerns working with children
+                    </span>
+                  )}
+                </div>
               </div>
-              <span className="rounded-full bg-white border border-zinc-200 px-3 py-1 text-xs text-zinc-500 font-medium whitespace-nowrap">
-                {context}
-              </span>
-            </div>
 
-            {/* Pull quote */}
-            <div className="px-8 py-6 border-b border-zinc-100 bg-white">
-              <blockquote className="relative pl-5 border-l-2 border-zinc-300">
-                <p className="text-zinc-700 leading-relaxed italic text-sm sm:text-base">
-                  &ldquo;{pullQuote}&rdquo;
+              {/* Ratings */}
+              <div className="px-8 py-6 border-b border-zinc-100">
+                <p className="text-xs font-medium uppercase tracking-wide text-zinc-400 mb-4">
+                  Performance Ratings <span className="normal-case font-normal">(1 Unsatisfactory → 5 Exceptional)</span>
                 </p>
-              </blockquote>
-            </div>
+                <div className="grid gap-2 sm:grid-cols-2">
+                  {ratingCategories.map((cat) => (
+                    <div key={cat} className="flex items-center justify-between gap-4">
+                      <span className="text-sm text-zinc-600">{cat}</span>
+                      <div className="flex gap-0.5 shrink-0">
+                        {[1, 2, 3, 4, 5].map((n) => (
+                          <span
+                            key={n}
+                            className="w-4 h-4 rounded-sm bg-zinc-900"
+                          />
+                        ))}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+                <p className="mt-4 text-xs text-zinc-400">
+                  All {ratingCategories.length} categories rated <span className="font-medium text-zinc-600">5 — Exceptional</span>
+                </p>
+              </div>
 
-            {/* Full letter */}
-            <div className="px-8 py-6 space-y-4">
-              {body.map((para, i) => (
-                <p key={i} className="text-sm text-zinc-600 leading-relaxed">
-                  {para}
+              {/* Strengths */}
+              <div className="px-8 py-6 border-b border-zinc-100">
+                <p className="text-xs font-medium uppercase tracking-wide text-zinc-400 mb-3">
+                  3 Greatest Strengths
                 </p>
-              ))}
-              <p className="text-sm text-zinc-400 pt-2">— {closing}</p>
-            </div>
-          </article>
-        ))}
-      </div>
+                <ul className="space-y-2">
+                  {strengths.map((s, i) => (
+                    <li key={i} className="flex gap-3 text-sm text-zinc-600 leading-relaxed">
+                      <span className="text-zinc-300 mt-0.5 shrink-0">›</span>
+                      {s}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* Areas for improvement */}
+              <div className="px-8 py-5 border-b border-zinc-100 bg-zinc-50">
+                <p className="text-xs font-medium uppercase tracking-wide text-zinc-400 mb-2">
+                  Areas for Growth
+                </p>
+                <p className="text-sm text-zinc-600 leading-relaxed italic">{improvement}</p>
+              </div>
+
+              {/* Comment */}
+              <div className="px-8 py-6">
+                <p className="text-xs font-medium uppercase tracking-wide text-zinc-400 mb-3">
+                  Additional Comments
+                </p>
+                <blockquote className="pl-5 border-l-2 border-zinc-300">
+                  <p className="text-zinc-700 leading-relaxed italic text-sm sm:text-base">
+                    &ldquo;{comment}&rdquo;
+                  </p>
+                </blockquote>
+                <p className="mt-3 text-sm text-zinc-400">— {name}</p>
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      {/* Letters of Recommendation */}
+      <section>
+        <h2 className="text-xl font-semibold mb-6">Letters of Recommendation</h2>
+        <div className="space-y-12">
+          {letters.map(({ name, title, institution, context, pullQuote, body, closing }) => (
+            <article
+              key={name}
+              className="rounded-2xl border border-zinc-200 overflow-hidden"
+            >
+              {/* Header */}
+              <div className="bg-zinc-50 border-b border-zinc-100 px-8 py-5 flex flex-wrap items-start justify-between gap-3">
+                <div>
+                  <p className="font-semibold text-zinc-900">{name}</p>
+                  <p className="text-sm text-zinc-500 mt-0.5">{title}</p>
+                  <p className="text-sm text-zinc-400">{institution}</p>
+                </div>
+                <span className="rounded-full bg-white border border-zinc-200 px-3 py-1 text-xs text-zinc-500 font-medium whitespace-nowrap">
+                  {context}
+                </span>
+              </div>
+
+              {/* Pull quote */}
+              <div className="px-8 py-6 border-b border-zinc-100 bg-white">
+                <blockquote className="relative pl-5 border-l-2 border-zinc-300">
+                  <p className="text-zinc-700 leading-relaxed italic text-sm sm:text-base">
+                    &ldquo;{pullQuote}&rdquo;
+                  </p>
+                </blockquote>
+              </div>
+
+              {/* Full letter */}
+              <div className="px-8 py-6 space-y-4">
+                {body.map((para, i) => (
+                  <p key={i} className="text-sm text-zinc-600 leading-relaxed">
+                    {para}
+                  </p>
+                ))}
+                <p className="text-sm text-zinc-400 pt-2">— {closing}</p>
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
     </div>
   );
 }

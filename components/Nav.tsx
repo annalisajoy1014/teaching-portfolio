@@ -8,7 +8,7 @@ const links = [
   { href: "/", label: "Overview" },
   { href: "/units", label: "Unit Overview" },
   { href: "/test-prep", label: "Test Prep" },
-  { href: "/recommendations", label: "Recommendations" },
+  { href: "/recommendations", label: "References & Reviews" },
   { href: "/contact", label: "Contact" },
 ];
 
