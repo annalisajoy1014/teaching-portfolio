@@ -1,19 +1,8 @@
 import type { Metadata } from "next";
+import UnitsGallery, { type Unit } from "@/components/UnitsGallery";
 
 export const metadata: Metadata = {
   title: "Unit Overview · Teaching Portfolio",
-};
-
-type Unit = {
-  course: string;
-  courseColor: string;
-  title: string;
-  duration: string;
-  essentialQuestions: string[];
-  objectives: string[];
-  skills: string;
-  scaffoldsFrom?: string;
-  scaffoldsTo?: string;
 };
 
 const units: Unit[] = [
@@ -21,19 +10,26 @@ const units: Unit[] = [
   {
     course: "AP Literature",
     courseColor: "bg-violet-50 text-violet-700 ring-1 ring-violet-200",
-    title: "Unit 1 · Short Fiction I: Character & Perspective",
+    title: "Unit 1 · Short Fiction: Fahrenheit 451",
     duration: "~3.5 weeks",
+    heroImage: "/units/dark-river.jpg",
+    heroAlt: "A lone figure holding a light in a dark underground river — evoking the underground book-preservation world of Fahrenheit 451",
     essentialQuestions: [
-      "How do authors use character and perspective to shape a reader's experience of a story?",
-      "What does it mean to make a defensible interpretive claim about a text?",
+      "What does Bradbury's dystopia argue about the relationship between knowledge, conformity, and power?",
+      "How do authors use character transformation to deliver a text's central argument?",
     ],
     objectives: [
-      "Analyze how narrative point of view and characterization create meaning in short fiction",
-      "Practice the Double Entry Reading Journal to build evidence-based commentary",
-      "Write a thesis using the 'statement of opinion + why' (OW!) framework",
-      "Attempt FRQ Q2 (prose fiction analysis) under timed conditions",
+      "Analyze how Bradbury develops Montag's character arc through setting, imagery, and symbol",
+      "Practice the Double Entry Reading Journal to move from plot summary to analytical observation",
+      "Write a thesis using the 'Opinion + Why' (OW!) framework applied to a defensible interpretation",
+      "Attempt FRQ Q2 (prose fiction analysis) using passages from the novel under timed conditions",
     ],
-    skills: "Close reading, annotation, thesis construction, prose fiction FRQ (Q2)",
+    skills: "Close reading, character analysis, symbolism, thesis construction, prose fiction FRQ (Q2)",
+    gallery: [
+      { src: "/units/plot-diagram.jpg", alt: "Plot diagram handout with definitions for each story element", caption: "Story elements diagram" },
+      { src: "/units/story-arc.png",    alt: "Story Arc worksheet: Freytag's Pyramid with student example 'The Frog'", caption: "Story arc — student model" },
+      { src: "/units/story-map.jpg",    alt: "Story map graphic organizer for tracking narrative structure", caption: "Narrative story map" },
+    ],
     scaffoldsTo: "Unit 2 · Poetry I",
   },
   {
@@ -41,62 +37,70 @@ const units: Unit[] = [
     courseColor: "bg-violet-50 text-violet-700 ring-1 ring-violet-200",
     title: "Unit 2 · Poetry I: Imagery & Speaker",
     duration: "~3.5 weeks",
+    heroImage: "/units/quill-pen.jpg",
+    heroAlt: "Quill pen resting in an ink well on aged parchment — classical writing imagery",
     essentialQuestions: [
       "How do poets use imagery, diction, and form to construct meaning?",
       "What is the difference between a poem's speaker and its author, and why does it matter?",
     ],
     objectives: [
-      "Apply the TP(P)-CASTT method to analyze unfamiliar poems",
+      "Apply the TP(P)-CASTT method to analyze unfamiliar poems: Title, Paraphrase, Predict, Connotation, Attitude/Tone, Shifts, Title revisited, Theme/Claim",
       "Identify and analyze shifts in tone and perspective within a poem",
       "Write a poetry analysis essay with textual evidence and line citations",
       "Attempt FRQ Q1 (poetry analysis) under timed conditions",
     ],
     skills: "TP(P)-CASTT analysis, poetic devices, tone & shift identification, poetry FRQ (Q1)",
-    scaffoldsFrom: "Unit 1 · Short Fiction I",
+    scaffoldsFrom: "Unit 1 · Short Fiction",
     scaffoldsTo: "Unit 3 · Longer Fiction or Drama I",
   },
   {
     course: "AP Literature",
     courseColor: "bg-violet-50 text-violet-700 ring-1 ring-violet-200",
-    title: "Unit 3 · Longer Fiction or Drama I: Structure & Meaning",
+    title: "Unit 3 · Longer Fiction or Drama I: Hamlet",
     duration: "~3.5 weeks",
+    heroImage: "/units/castle-lit.jpg",
+    heroAlt: "Atmospheric castle in stormy weather — evoking the world of Hamlet and Shakespearean drama",
     essentialQuestions: [
-      "How does the structure of a longer work accumulate meaning across its arc?",
-      "What is the relationship between a character's choices and the text's central argument?",
+      "How does Shakespeare use dramatic structure and language to accumulate meaning across a full play?",
+      "What is the relationship between a character's choices and the text's central argument about mortality and action?",
     ],
     objectives: [
-      "Trace how literary elements develop across a full novel or play",
+      "Trace how literary elements develop across the full arc of a longer work",
       "Construct a literary argument with a defensible, complex thesis",
-      "Practice FRQ Q3 (literary argument) using works studied",
-      "Give and receive structured peer feedback on analytical essays",
+      "Practice FRQ Q3 (literary argument) using works studied in class",
+      "Give and receive structured peer feedback on analytical essays using the AP rubric",
     ],
     skills: "Extended literary analysis, FRQ Q3, literary argument, peer review",
     scaffoldsFrom: "Unit 2 · Poetry I",
-    scaffoldsTo: "Unit 4 · Short Fiction II",
+    scaffoldsTo: "Units 4–6 · Second Rotation",
   },
   {
     course: "AP Literature",
     courseColor: "bg-violet-50 text-violet-700 ring-1 ring-violet-200",
     title: "Units 4–6 · Second Rotation: Complexity & Ambiguity",
     duration: "~10 weeks",
+    heroImage: "/units/dragon-fantasy.jpg",
+    heroAlt: "A dragon soaring over mountains — evoking imagination, power, and the complexity of great literature",
     essentialQuestions: [
       "How do authors use ambiguity and complexity to resist easy interpretation?",
       "What makes an analytical claim 'sophisticated' rather than merely accurate?",
     ],
     objectives: [
-      "Apply Row C (sophistication) criteria: situating a text in broader context, using literary comparison, or exploring tensions within the argument",
+      "Apply Row C sophistication criteria: situating a text in broader context, using literary comparison, or exploring tensions within the argument",
       "Read AP-exam level passages in all three genres with increasing independence",
       "Complete full-length timed practice on all three FRQ types",
     ],
     skills: "Sophisticated argumentation, all three FRQ types, comparative analysis, exam stamina",
     scaffoldsFrom: "Unit 3 · Longer Fiction or Drama I",
-    scaffoldsTo: "Units 7–9 · Third Rotation",
+    scaffoldsTo: "Units 7–9 · Exam Preparation",
   },
   {
     course: "AP Literature",
     courseColor: "bg-violet-50 text-violet-700 ring-1 ring-violet-200",
-    title: "Units 7–9 · Third Rotation: Exam Preparation & Synthesis",
+    title: "Units 7–9 · Third Rotation: Exam Preparation",
     duration: "~10 weeks",
+    heroImage: "/units/quill-pen.jpg",
+    heroAlt: "Quill pen and ink — the art of writing under pressure",
     essentialQuestions: [
       "How do we bring everything we have learned to bear on an unseen text in 40 minutes?",
       "What does our strongest analytical work look like under pressure?",
@@ -116,6 +120,8 @@ const units: Unit[] = [
     courseColor: "bg-blue-50 text-blue-700 ring-1 ring-blue-200",
     title: "Unit 1 · Reading Rhetoric: How Writers Persuade",
     duration: "~4 weeks",
+    heroImage: "/units/map-pins.jpg",
+    heroAlt: "Red pins marking locations on a map — a visual metaphor for charting an author's rhetorical choices",
     essentialQuestions: [
       "How do writers use rhetorical strategies to achieve their purpose with a specific audience?",
       "What does it mean to analyze an argument rather than simply agree or disagree with it?",
@@ -133,6 +139,8 @@ const units: Unit[] = [
     courseColor: "bg-blue-50 text-blue-700 ring-1 ring-blue-200",
     title: "Unit 2 · Building Arguments: Evidence & Sophistication",
     duration: "~4 weeks",
+    heroImage: "/units/puzzle-piece.jpg",
+    heroAlt: "A single red puzzle piece fitting into a white puzzle — the pieces of a strong argument fitting together",
     essentialQuestions: [
       "How do writers select, integrate, and explain evidence to build credible arguments?",
       "What separates a nuanced, complex argument from a one-sided claim?",
@@ -151,6 +159,8 @@ const units: Unit[] = [
     courseColor: "bg-blue-50 text-blue-700 ring-1 ring-blue-200",
     title: "Unit 3 · Synthesis Writing: Source Literacy & Integration",
     duration: "~4 weeks",
+    heroImage: "/units/vocab-resource.jpg",
+    heroAlt: "Chart of 45 alternatives to the word 'very' — a resource for precise, persuasive language",
     essentialQuestions: [
       "How do we read multiple sources critically and use them in conversation with each other?",
       "What is the difference between citing a source and using it to build an argument?",
@@ -170,6 +180,8 @@ const units: Unit[] = [
     courseColor: "bg-rose-50 text-rose-700 ring-1 ring-rose-200",
     title: "Unit 1 · Corruption & Consequence: The Picture of Dorian Gray",
     duration: "~5 weeks",
+    heroImage: "/units/hand-flowers.jpg",
+    heroAlt: "A hand reaching toward delicate wildflowers — beauty, transience, and the Aesthetic movement at the heart of Dorian Gray",
     essentialQuestions: [
       "How does Wilde use symbolism and wit to critique Victorian society?",
       "What does the novel argue about the relationship between beauty, morality, and identity?",
@@ -188,6 +200,8 @@ const units: Unit[] = [
     courseColor: "bg-rose-50 text-rose-700 ring-1 ring-rose-200",
     title: "Unit 2 · Voice & Alienation: The Catcher in the Rye",
     duration: "~5 weeks",
+    heroImage: "/units/picture-of-childhood.jpg",
+    heroAlt: "A photograph evoking childhood memory and the passage of time — central to Holden Caulfield's voice",
     essentialQuestions: [
       "How does Salinger use an unreliable narrator to create irony and sympathy simultaneously?",
       "What does Holden's voice reveal about adolescence, authenticity, and loss?",
@@ -200,13 +214,44 @@ const units: Unit[] = [
     ],
     skills: "Unreliable narrator, literary argument, Socratic seminar, timed writing",
     scaffoldsFrom: "Unit 1 · The Picture of Dorian Gray",
-    scaffoldsTo: "Unit 3 · The Poetry Project",
+    scaffoldsTo: "Unit 3 · Building a Great Story",
   },
   {
     course: "Honors Literature",
     courseColor: "bg-rose-50 text-rose-700 ring-1 ring-rose-200",
-    title: "Unit 3 · The Poetry Project: Form, Voice & Meaning",
+    title: "Unit 3 · Building a Great Story: Narrative Essay",
     duration: "~4 weeks",
+    heroImage: "/units/quill-pen.jpg",
+    heroAlt: "Quill pen and ink on aged parchment — the craft of writing a personal narrative",
+    essentialQuestions: [
+      "What are the structural and stylistic elements that make a story come alive on the page?",
+      "How does a writer choose what to include, what to leave out, and how to sequence events for maximum impact?",
+    ],
+    objectives: [
+      "Apply Freytag's Pyramid (exposition, conflict, rising action, climax, falling action, resolution) to plan a personal narrative",
+      "Draft and revise a narrative essay using sensory detail, scene-building, and varied sentence structure",
+      "Replace weak word choices with precise, vivid language (e.g., alternatives to overused words like 'very' and 'said')",
+      "Use transition words and phrases to control pace and guide the reader through the story",
+    ],
+    skills: "Story arc planning, narrative writing, sentence variety, word choice, revision strategies",
+    scaffoldsFrom: "Unit 2 · The Catcher in the Rye",
+    scaffoldsTo: "Unit 4 · The Poetry Project",
+    gallery: [
+      { src: "/units/story-arc.png",        alt: "Story Arc diagram: Freytag's Pyramid with a complete student model narrative", caption: "Story arc — student model" },
+      { src: "/units/story-building.jpg",   alt: "Aerial view of a building under construction — the metaphor for constructing a great story", caption: "Building your story" },
+      { src: "/units/puzzle-piece.jpg",     alt: "A red puzzle piece fitting into place — story elements coming together", caption: "Story elements as puzzle pieces" },
+      { src: "/units/map-pins.jpg",         alt: "Pins marking locations on a map — planning your narrative's setting and plot points", caption: "Mapping your plot" },
+      { src: "/units/narrative-outline.jpg",alt: "Narrative essay outline graphic organizer", caption: "Essay outline template" },
+      { src: "/units/vocab-resource.jpg",   alt: "45 alternatives to the word 'very' — vocabulary enrichment for precise writing", caption: "Word choice resource" },
+    ],
+  },
+  {
+    course: "Honors Literature",
+    courseColor: "bg-rose-50 text-rose-700 ring-1 ring-rose-200",
+    title: "Unit 4 · The Poetry Project: Form, Voice & Meaning",
+    duration: "~4 weeks",
+    heroImage: "/units/castle-lit.jpg",
+    heroAlt: "Atmospheric castle in the rain — the dramatic, layered world of poetry",
     essentialQuestions: [
       "How do poets use form and structure as expressive tools?",
       "What is the relationship between a poem's sonic qualities and its meaning?",
@@ -218,58 +263,71 @@ const units: Unit[] = [
       "Write a comparative poetry analysis essay",
     ],
     skills: "Prosody, scansion, sonnet forms, comparative analysis, creative writing with annotation",
-    scaffoldsFrom: "Unit 2 · The Catcher in the Rye",
+    scaffoldsFrom: "Unit 3 · Building a Great Story",
   },
 
   // ── 8th Grade English ──────────────────────────────────────────────────────
   {
     course: "8th Grade English",
     courseColor: "bg-emerald-50 text-emerald-700 ring-1 ring-emerald-200",
-    title: "Trimester 1 · Elements of Story: Fahrenheit 451",
+    title: "Trimester 1 · Elements of Story & Narrative Writing",
     duration: "12 weeks",
+    heroImage: "/units/plot-diagram.jpg",
+    heroAlt: "Plot diagram handout showing story elements with definitions — a core teaching tool for Trimester 1",
     essentialQuestions: [
       "How do authors use character, plot, and point of view to build a story's meaning?",
       "What makes a narrative essay vivid and purposeful?",
     ],
     objectives: [
       "Identify and analyze elements of fiction: characterization (STEAL), POV, plot structure (Freytag's Pyramid), mood, tone, and theme",
-      "Read and discuss Fahrenheit 451 at a rate of 6 pages per day",
       "Write a three-draft narrative essay with emphasis on sentence variety and paragraph structure",
       "Correct common grammar errors: subject/verb agreement, pronoun/antecedent agreement, run-ons, fragments",
     ],
     skills: "Elements of fiction, characterization, narrative essay, grammar fundamentals",
-    scaffoldsTo: "Trimester 2 · Dramatic Irony: The Glass Menagerie",
+    gallery: [
+      { src: "/units/plot-diagram.jpg",     alt: "Plot diagram with story element definitions — classroom handout", caption: "Story elements reference" },
+      { src: "/units/story-map.jpg",        alt: "Story map graphic organizer for narrative planning", caption: "Story map organizer" },
+      { src: "/units/transition-words.jpg", alt: "Transition words and phrases reference chart", caption: "Transitions chart" },
+    ],
+    scaffoldsTo: "Trimester 2 · Dramatic Irony & Persuasion",
   },
   {
     course: "8th Grade English",
     courseColor: "bg-emerald-50 text-emerald-700 ring-1 ring-emerald-200",
     title: "Trimester 2 · Dramatic Irony & Persuasion: The Glass Menagerie",
     duration: "12 weeks",
+    heroImage: "/units/hand-flowers.jpg",
+    heroAlt: "A hand reaching toward wildflowers — evoking Tennessee Williams' lyrical, fragile world of The Glass Menagerie",
     essentialQuestions: [
       "How do playwrights use irony to reveal character and social critique?",
       "How do writers use rhetorical appeals to persuade an audience?",
     ],
     objectives: [
       "Analyze verbal, situational, and dramatic irony in Tennessee Williams' The Glass Menagerie",
-      "Study 'This Is Water' by David Foster Wallace as a model of persuasive nonfiction",
+      "Study 'This Is Water' by David Foster Wallace as a model of contemporary persuasive nonfiction",
       "Write a three-draft irony analysis essay and a three-draft persuasive essay",
       "Learn rhetorical appeals (ethos, pathos, logos, kairos) and advanced figurative language (paradox, oxymoron, euphemism)",
     ],
     skills: "Irony analysis, rhetorical appeals, persuasive essay, figurative language, MLA citation",
+    gallery: [
+      { src: "/units/transition-words.jpg", alt: "Transition words and phrases chart used for essay writing", caption: "Transitions for essays" },
+    ],
     scaffoldsFrom: "Trimester 1 · Elements of Story",
     scaffoldsTo: "Trimester 3 · Language & Power: The Tempest",
   },
   {
     course: "8th Grade English",
     courseColor: "bg-emerald-50 text-emerald-700 ring-1 ring-emerald-200",
-    title: "Trimester 3 · Language & Power: The Tempest",
+    title: "Trimester 3 · Language & Power: The Tempest & Poetry",
     duration: "13 weeks",
+    heroImage: "/units/castle-lit.jpg",
+    heroAlt: "A castle in stormy weather — the atmosphere of Shakespeare's The Tempest",
     essentialQuestions: [
       "How does Shakespeare use language, power, and magic to explore justice and forgiveness?",
       "How do form and structure in poetry create layers of meaning?",
     ],
     objectives: [
-      "Read The Tempest at 6 pages per day; analyze archaic diction and dramatic structure",
+      "Read The Tempest and analyze archaic diction and dramatic structure",
       "Study elements of poetry: meter, iambic pentameter, rhyme schemes, sonnet forms (English and Italian)",
       "Write a three-draft narrative poetry analysis essay and a three-draft comparative essay",
       "Master advanced sentence variety: absolute phrases, relative clauses, adverb and noun clauses",
@@ -284,6 +342,8 @@ const units: Unit[] = [
     courseColor: "bg-amber-50 text-amber-700 ring-1 ring-amber-200",
     title: "Unit 1 · Verbal Mastery: Synonyms & Analogies",
     duration: "Flexible (4–6 weeks)",
+    heroImage: "/units/vocab-resource.jpg",
+    heroAlt: "Vocabulary enrichment chart: 45 alternatives to the word 'very' — reflecting the precision-focused approach of SSAT verbal prep",
     essentialQuestions: [
       "How does precise vocabulary knowledge unlock every other section of the SSAT?",
       "What strategies help students decode unfamiliar words and identify analogy relationships?",
@@ -302,6 +362,8 @@ const units: Unit[] = [
     courseColor: "bg-amber-50 text-amber-700 ring-1 ring-amber-200",
     title: "Unit 2 · Critical Reading: Passage Strategies",
     duration: "Flexible (4–6 weeks)",
+    heroImage: "/units/map-pins.jpg",
+    heroAlt: "Pins on a map — planning your route through a reading passage using the 5 W's",
     essentialQuestions: [
       "How do active readers extract meaning efficiently under timed test conditions?",
       "What is the author's purpose, and how does recognizing it sharpen comprehension?",
@@ -313,6 +375,9 @@ const units: Unit[] = [
       "Practice evidence-based answer selection from authentic Middle Level reading materials",
     ],
     skills: "Active annotation, 5 W's framework, passage mapping, time management, inference",
+    gallery: [
+      { src: "/units/transition-words.jpg", alt: "Transition words chart used to identify structural shifts in SSAT reading passages", caption: "Transitions as reading signposts" },
+    ],
     scaffoldsFrom: "Unit 1 · Verbal Mastery",
   },
 ];
@@ -328,8 +393,8 @@ const courseOrder = [
 export default function UnitsPage() {
   const grouped = courseOrder.map((course) => ({
     course,
-    units: units.filter((u) => u.course === course),
     color: units.find((u) => u.course === course)?.courseColor ?? "",
+    units: units.filter((u) => u.course === course),
   }));
 
   return (
@@ -338,92 +403,12 @@ export default function UnitsPage() {
         <h1 className="text-4xl font-bold tracking-tight">Unit Overview</h1>
         <p className="mt-4 max-w-2xl text-zinc-500 leading-relaxed">
           A macroscopic view of every unit I have planned — organized by course,
-          sequenced from start to finish. Each card shows how learning objectives
-          build on one another through deliberate scaffolding.
+          sequenced from start to finish. Click any unit to explore the full
+          details, materials, and scaffolding.
         </p>
       </header>
 
-      <div className="space-y-16">
-        {grouped.map(({ course, units: courseUnits, color }) => (
-          <section key={course}>
-            <div className="flex items-center gap-3 mb-6">
-              <span className={`rounded-full px-3 py-1 text-xs font-medium ${color}`}>
-                {course}
-              </span>
-              <span className="text-sm text-zinc-400">
-                {courseUnits.length} unit{courseUnits.length !== 1 ? "s" : ""}
-              </span>
-            </div>
-
-            <div className="relative">
-              {/* Timeline line */}
-              <div className="absolute left-4 top-0 bottom-0 w-px bg-zinc-100 hidden sm:block" />
-
-              <div className="space-y-6">
-                {courseUnits.map((unit, idx) => (
-                  <div key={idx} className="sm:pl-12 relative">
-                    {/* Timeline dot */}
-                    <div className="absolute left-3 top-6 h-2.5 w-2.5 rounded-full border-2 border-zinc-300 bg-white hidden sm:block" />
-
-                    <div className="rounded-2xl border border-zinc-200 p-6">
-                      <div className="flex flex-wrap items-start justify-between gap-2 mb-4">
-                        <h3 className="font-semibold text-zinc-900 leading-snug max-w-xl">
-                          {unit.title}
-                        </h3>
-                        <span className="text-xs text-zinc-400 whitespace-nowrap">
-                          {unit.duration}
-                        </span>
-                      </div>
-
-                      <div className="grid gap-5 sm:grid-cols-2 text-sm">
-                        <div>
-                          <p className="text-xs font-medium uppercase tracking-wide text-zinc-400 mb-2">
-                            Essential Questions
-                          </p>
-                          <ul className="space-y-1.5">
-                            {unit.essentialQuestions.map((q, i) => (
-                              <li key={i} className="text-zinc-600 leading-relaxed">
-                                {q}
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
-
-                        <div>
-                          <p className="text-xs font-medium uppercase tracking-wide text-zinc-400 mb-2">
-                            Learning Objectives
-                          </p>
-                          <ul className="space-y-1.5">
-                            {unit.objectives.map((o, i) => (
-                              <li key={i} className="flex gap-2 text-zinc-600 leading-relaxed">
-                                <span className="text-zinc-300 mt-0.5">›</span>
-                                {o}
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
-                      </div>
-
-                      <div className="mt-4 pt-4 border-t border-zinc-100 flex flex-wrap gap-x-6 gap-y-2 text-xs text-zinc-400">
-                        <span>
-                          <span className="font-medium text-zinc-500">Skills: </span>
-                          {unit.skills}
-                        </span>
-                        {unit.scaffoldsFrom && (
-                          <span>← Builds on: {unit.scaffoldsFrom}</span>
-                        )}
-                        {unit.scaffoldsTo && (
-                          <span>→ Leads to: {unit.scaffoldsTo}</span>
-                        )}
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </section>
-        ))}
-      </div>
+      <UnitsGallery grouped={grouped} />
     </div>
   );
 }
