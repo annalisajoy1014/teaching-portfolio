@@ -17,10 +17,15 @@ export default function Footer() {
           &copy; {new Date().getFullYear()} Annalisa Ard
         </span>
         <span
-          className="eyebrow"
-          style={{ fontSize: 11 }}
+          style={{
+            fontSize: 11,
+            color: "var(--faint)",
+            letterSpacing: "0.02em",
+            fontStyle: "italic",
+            textAlign: "right",
+          }}
         >
-          Open to new opportunities
+          &ldquo;Curiosity is the wick in the candle of learning&rdquo; &mdash; William Arthur Ward
         </span>
       </div>
     </footer>

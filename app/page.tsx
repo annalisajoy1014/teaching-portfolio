@@ -42,7 +42,7 @@ export default function OverviewPage() {
               style={{ fontSize: "clamp(52px, 7vw, 96px)", lineHeight: 0.96, marginBottom: 32 }}
             >
               Annalisa{" "}
-              <em className="accent">Ard.</em>
+              <em className="accent">Ard</em>
             </h1>
 
             <p
@@ -69,10 +69,9 @@ export default function OverviewPage() {
                 marginBottom: 40,
               }}
             >
-              My career has spanned two continents and four countries — from tutoring
-              Spanish-speaking learners in California, to four years across all ages
-              and levels in Thailand, to secondary ELA instruction in the US including
-              AP Literature, AP Language, Honors Literature, and 8th Grade English.
+              I found my interest in language and linguistics early on and have dedicated
+              my professional life to pursuing a career which allows me to share this
+              enthusiasm with others by way of teaching.
             </p>
 
             <div className="flex flex-wrap gap-3">
@@ -106,7 +105,7 @@ export default function OverviewPage() {
                 { label: "Subject Area", value: "English Language Arts" },
                 { label: "Grade Levels", value: "8–12" },
                 { label: "Specializations", value: "AP Lit · AP Lang · SSAT Prep" },
-                { label: "International", value: "California · Cambodia · Thailand" },
+                { label: "International", value: "USA · Cambodia · Thailand" },
               ].map(({ label, value }, i) => (
                 <div
                   key={label}
