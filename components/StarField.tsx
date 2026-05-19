@@ -6,9 +6,18 @@ interface Star {
   x: number;
   y: number;
   radius: number;
-  baseOpacity: number;
-  speed: number;
-  phase: number;
+  maxOpacity: number;
+  cycleDuration: number; // ms for a full wink cycle
+  timeOffset: number;    // stagger so they don't all sync
+}
+
+// Returns opacity 0→1→0→0 over one normalised cycle [0,1]
+// Fade in: 0–15%, hold: 15–30%, fade out: 30–45%, dark: 45–100%
+function winkEnvelope(phase: number): number {
+  if (phase < 0.15)  return phase / 0.15;
+  if (phase < 0.30)  return 1;
+  if (phase < 0.45)  return 1 - (phase - 0.30) / 0.15;
+  return 0;
 }
 
 export default function StarField() {
@@ -24,14 +33,14 @@ export default function StarField() {
     let stars: Star[] = [];
 
     function createStars() {
-      const count = Math.floor((canvas!.width * canvas!.height) / 14000);
+      const count = Math.floor((canvas!.width * canvas!.height) / 13000);
       stars = Array.from({ length: count }, () => ({
         x: Math.random() * canvas!.width,
         y: Math.random() * canvas!.height,
-        radius: Math.random() * 1.1 + 0.2,
-        baseOpacity: Math.random() * 0.55 + 0.2,
-        speed: Math.random() * 1.5 + 0.4,
-        phase: Math.random() * Math.PI * 2,
+        radius: Math.random() * 0.9 + 0.25,
+        maxOpacity: Math.random() * 0.35 + 0.12,   // very subtle: 0.12–0.47
+        cycleDuration: (Math.random() * 14 + 8) * 1000, // 8–22 seconds
+        timeOffset: Math.random() * 30000,           // spread starts across 30s
       }));
     }
 
@@ -45,19 +54,19 @@ export default function StarField() {
       ctx!.clearRect(0, 0, canvas!.width, canvas!.height);
 
       for (const star of stars) {
-        const t = time * 0.0003 * star.speed + star.phase;
-        const twinkle = Math.sin(t);
-        const opacity = star.baseOpacity * (0.45 + 0.55 * ((twinkle + 1) / 2));
-        const r = star.radius * (0.85 + 0.15 * ((twinkle + 1) / 2));
-        const glowR = r * 4;
+        const phase = ((time + star.timeOffset) % star.cycleDuration) / star.cycleDuration;
+        const opacity = star.maxOpacity * winkEnvelope(phase);
+        if (opacity < 0.008) continue; // skip fully dark stars
 
-        const grad = ctx!.createRadialGradient(
-          star.x, star.y, 0,
-          star.x, star.y, glowR
-        );
-        grad.addColorStop(0,   `rgba(255, 255, 255, ${opacity})`);
-        grad.addColorStop(0.25, `rgba(210, 225, 255, ${opacity * 0.55})`);
-        grad.addColorStop(1,   `rgba(180, 210, 255, 0)`);
+        const r = star.radius;
+        const glowR = r * 4.5;
+
+        // Slightly blue-tinted star: pale blue-white core, soft blue outer glow
+        const grad = ctx!.createRadialGradient(star.x, star.y, 0, star.x, star.y, glowR);
+        grad.addColorStop(0,    `rgba(210, 228, 255, ${opacity})`);
+        grad.addColorStop(0.2,  `rgba(190, 215, 255, ${opacity * 0.7})`);
+        grad.addColorStop(0.55, `rgba(160, 200, 255, ${opacity * 0.25})`);
+        grad.addColorStop(1,    `rgba(140, 185, 255, 0)`);
 
         ctx!.beginPath();
         ctx!.arc(star.x, star.y, glowR, 0, Math.PI * 2);
