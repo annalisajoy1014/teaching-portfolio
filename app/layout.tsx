@@ -4,6 +4,7 @@ import { Newsreader } from "next/font/google";
 import "./globals.css";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
+import StarField from "@/components/StarField";
 
 const geist = Geist({
   variable: "--font-geist-sans",
@@ -36,9 +37,12 @@ export default function RootLayout({
         className="min-h-screen flex flex-col"
         style={{ background: "var(--bg)", color: "var(--ink)" }}
       >
-        <Nav />
-        <main className="flex-1">{children}</main>
-        <Footer />
+        <StarField />
+        <div className="relative flex-1 flex flex-col" style={{ zIndex: 1 }}>
+          <Nav />
+          <main className="flex-1">{children}</main>
+          <Footer />
+        </div>
       </body>
     </html>
   );
