@@ -125,7 +125,7 @@ const references: Reference[] = [
 
 export default function ReferencesPage() {
   return (
-    <div className="mx-auto max-w-[960px] px-6" style={{ paddingTop: 96, paddingBottom: 120 }}>
+    <div className="mx-auto max-w-[1400px] px-6" style={{ paddingTop: 96, paddingBottom: 120 }}>
       <header style={{ marginBottom: 80 }}>
         <p className="eyebrow mb-8">References &amp; Reviews</p>
         <h1

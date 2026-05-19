@@ -19,7 +19,7 @@ export default function TestPrepNav() {
       }}
     >
       <div
-        className="mx-auto max-w-[960px] px-6 flex gap-4"
+        className="mx-auto max-w-[1400px] px-6 flex gap-4"
         style={{ paddingTop: 24, paddingBottom: 24 }}
       >
         {tabs.map(({ href, label }) => (

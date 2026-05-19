@@ -31,7 +31,7 @@ export default function Nav() {
       }}
     >
       <nav
-        className="mx-auto flex max-w-[960px] items-center justify-between px-6"
+        className="mx-auto flex max-w-[1400px] items-center justify-between px-6"
         style={{ height: 64 }}
       >
         {/* Logo — italic Newsreader */}

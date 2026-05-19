@@ -416,7 +416,7 @@ export default function UnitsPage() {
   }));
 
   return (
-    <div className="mx-auto max-w-[960px] px-6" style={{ paddingTop: 96, paddingBottom: 120 }}>
+    <div className="mx-auto max-w-[1400px] px-6" style={{ paddingTop: 96, paddingBottom: 120 }}>
       <header className="mb-16">
         <p className="eyebrow mb-8">Unit Overview</p>
         <h1

@@ -48,7 +48,7 @@ const sections = [
 
 export default function SSATPage() {
   return (
-    <div className="mx-auto max-w-[960px] px-6" style={{ paddingTop: 80, paddingBottom: 120 }}>
+    <div className="mx-auto max-w-[1400px] px-6" style={{ paddingTop: 80, paddingBottom: 120 }}>
       <header style={{ marginBottom: 56 }}>
         <p className="eyebrow mb-8">Test Prep</p>
         <h1

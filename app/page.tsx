@@ -30,7 +30,7 @@ export default function OverviewPage() {
   return (
     <>
       {/* ── Hero ─────────────────────────────────────────────────── */}
-      <section className="mx-auto max-w-[960px] px-6" style={{ paddingTop: 96, paddingBottom: 120 }}>
+      <section className="mx-auto max-w-[1400px] px-6" style={{ paddingTop: 96, paddingBottom: 120 }}>
         <div className="grid gap-16 sm:grid-cols-[1.2fr_1fr] items-start">
 
           {/* Left: name + bio + pills */}
@@ -147,7 +147,7 @@ export default function OverviewPage() {
 
       {/* ── Teaching Philosophy ───────────────────────────────────── */}
       <section
-        className="mx-auto max-w-[960px] px-6"
+        className="mx-auto max-w-[1400px] px-6"
         style={{ paddingTop: 120, paddingBottom: 120, borderTop: "1px solid var(--hair)" }}
       >
         <p className="eyebrow mb-8">Teaching Philosophy</p>
@@ -215,7 +215,7 @@ export default function OverviewPage() {
 
       {/* ── Teaching Credentials ──────────────────────────────────── */}
       <section
-        className="mx-auto max-w-[960px] px-6"
+        className="mx-auto max-w-[1400px] px-6"
         style={{ paddingTop: 120, paddingBottom: 120, borderTop: "1px solid var(--hair)" }}
       >
         <p className="eyebrow mb-8">Teaching Credentials</p>
