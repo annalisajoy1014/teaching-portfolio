@@ -1,5 +1,3 @@
-import Link from "next/link";
-
 export default function Footer() {
   return (
     <footer>
@@ -18,16 +16,8 @@ export default function Footer() {
             color: "var(--ink)",
           }}
         >
-          Explore the portfolio
-          <br />
-          or <em className="accent">get in touch.</em>
+          Explore the <em className="accent">portfolio.</em>
         </h2>
-
-        <div className="flex flex-wrap items-center justify-center gap-3 mt-10">
-          <Link href="/units" className="pill-outline">Unit Overview</Link>
-          <Link href="/test-prep" className="pill-outline">Test Prep</Link>
-          <Link href="/contact" className="pill-primary">Contact</Link>
-        </div>
       </section>
 
       {/* Copyright row */}

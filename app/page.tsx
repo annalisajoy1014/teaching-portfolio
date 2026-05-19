@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import CredentialsAccordion from "@/components/CredentialsAccordion";
 
 const principles = [
   {
@@ -24,16 +25,6 @@ const principles = [
   },
 ];
 
-const credentials = [
-  { label: "Degree", value: "BA in English — California State University, San Bernardino" },
-  { label: "Degree", value: "MA in TESOL — Vancouver Island University" },
-  { label: "Certification", value: "TESOL Certificate — International TEFL Academy" },
-  { label: "Experience", value: "English Language Arts, Grades 8–12 (US)" },
-  { label: "Experience", value: "EFL Instructor — Thailand · 4 years, all ages & levels" },
-  { label: "Experience", value: "EFL Instructor — Cambodia · TESOL practicum & young learners" },
-  { label: "Experience", value: "ESL Tutor — California · Spanish-speaking learners" },
-  { label: "Courses Taught", value: "AP Literature · AP Language · Honors Lit · 8th Grade English · SSAT Prep" },
-];
 
 export default function OverviewPage() {
   return (
@@ -86,7 +77,6 @@ export default function OverviewPage() {
 
             <div className="flex flex-wrap gap-3">
               <Link href="/units" className="pill-primary">View My Units</Link>
-              <Link href="/contact" className="pill-outline">Get in Touch</Link>
             </div>
           </div>
 
@@ -117,8 +107,7 @@ export default function OverviewPage() {
                 { label: "Grade Levels", value: "8–12" },
                 { label: "Specializations", value: "AP Lit · AP Lang · SSAT Prep" },
                 { label: "International", value: "California · Cambodia · Thailand" },
-                { label: "Email", value: "annalisa.joy1014@gmail.com", purple: true },
-              ].map(({ label, value, purple }, i) => (
+              ].map(({ label, value }, i) => (
                 <div
                   key={label}
                   className="flex items-baseline justify-between gap-4 py-3"
@@ -138,7 +127,7 @@ export default function OverviewPage() {
                   <dd
                     style={{
                       fontSize: 13,
-                      color: purple ? "var(--purple)" : "var(--ink)",
+                      color: "var(--ink)",
                       textAlign: "right",
                       letterSpacing: "-0.005em",
                     }}
@@ -244,15 +233,7 @@ export default function OverviewPage() {
           </p>
         </div>
 
-        <div>
-          {credentials.map(({ label, value }, i) => (
-            <div key={i} className="cred-row">
-              <span className="idx">{String(i + 1).padStart(2, "0")}</span>
-              <span className="lbl">{label}</span>
-              <span className="val">{value}</span>
-            </div>
-          ))}
-        </div>
+        <CredentialsAccordion />
       </section>
     </>
   );
