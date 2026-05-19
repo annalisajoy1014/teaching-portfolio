@@ -6,7 +6,7 @@
   --color-ink:       #f5f5f5;
   --color-muted:     #8a8794;
   --color-faint:     #5b5867;
-  --color-purple:    #000080;
+  --color-purple:    #2B60DE;
   --font-sans:       var(--font-geist-sans), system-ui, sans-serif;
 }
 
@@ -16,7 +16,7 @@
   --ink:          #f5f5f5;
   --muted:        #8a8794;
   --faint:        #5b5867;
-  --purple:       #000080;
+  --purple:       #2B60DE;
   --hair:         rgba(255, 255, 255, 0.08);
   --font-display: var(--font-newsreader), Georgia, serif;
 }
