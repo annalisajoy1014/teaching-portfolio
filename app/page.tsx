@@ -31,23 +31,39 @@ export default function OverviewPage() {
     <>
       {/* ── Hero ─────────────────────────────────────────────────── */}
       <section className="mx-auto max-w-[1400px] px-6" style={{ paddingTop: 96, paddingBottom: 120 }}>
+
+        {/* Centered name + tagline */}
+        <div className="text-center" style={{ marginBottom: 72 }}>
+          <p className="eyebrow mb-6" style={{ justifyContent: "center" }}>Teaching Portfolio</p>
+          <h1
+            className="font-display"
+            style={{ fontSize: "clamp(52px, 7vw, 96px)", lineHeight: 0.96, marginBottom: 16, color: "var(--ink)" }}
+          >
+            Annalisa Ard
+          </h1>
+          <p
+            className="font-display"
+            style={{ fontSize: "clamp(21px, 2.4vw, 35px)", fontStyle: "italic", color: "#2B60DE", letterSpacing: "-0.01em" }}
+          >
+            Helping students to shoot for the stars
+          </p>
+        </div>
+
         <div className="grid gap-16 sm:grid-cols-[1.2fr_1fr] items-start">
 
-          {/* Left: name + bio + pills */}
+          {/* Left: bio + pills */}
           <div>
-            <p className="eyebrow mb-8">Teaching Portfolio</p>
-
-            <h1
-              className="font-display"
-              style={{ fontSize: "clamp(52px, 7vw, 96px)", lineHeight: 0.96, marginBottom: 16, color: "var(--ink)", whiteSpace: "nowrap" }}
-            >
-              Annalisa Ard
-            </h1>
             <p
-              className="font-display"
-              style={{ fontSize: "clamp(21px, 2.4vw, 35px)", fontStyle: "italic", color: "#2B60DE", marginBottom: 28, letterSpacing: "-0.01em" }}
+              style={{
+                fontSize: 16,
+                lineHeight: 1.5,
+                color: "var(--ink)",
+                letterSpacing: "-0.005em",
+                marginBottom: 20,
+                fontStyle: "italic",
+              }}
             >
-              Helping students to shoot for the stars
+              Educator at one of the top-performing schools in the U.S. and Arizona from 2021 to 2026
             </p>
 
             <p
