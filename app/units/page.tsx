@@ -12,8 +12,8 @@ const units: Unit[] = [
     courseColor: "bg-violet-50 text-violet-700 ring-1 ring-violet-200",
     title: "Unit 1 · Short Fiction: Fahrenheit 451",
     duration: "~3.5 weeks",
-    heroImage: "/units/dark-river.jpg",
-    heroAlt: "A lone figure holding a light in a dark underground river — evoking the underground book-preservation world of Fahrenheit 451",
+    heroImage: "/units/f451-burning-book.jpg",
+    heroAlt: "A book engulfed in flames — the central symbol of Bradbury's dystopia",
     essentialQuestions: [
       "What does Bradbury's dystopia argue about the relationship between knowledge, conformity, and power?",
       "How do authors use character transformation to deliver a text's central argument?",
@@ -26,9 +26,12 @@ const units: Unit[] = [
     ],
     skills: "Close reading, character analysis, symbolism, thesis construction, prose fiction FRQ (Q2)",
     gallery: [
-      { src: "/units/plot-diagram.jpg", alt: "Plot diagram handout with definitions for each story element", caption: "Story elements diagram" },
-      { src: "/units/story-arc.png",    alt: "Story Arc worksheet: Freytag's Pyramid with student example 'The Frog'", caption: "Story arc — student model" },
-      { src: "/units/story-map.jpg",    alt: "Story map graphic organizer for tracking narrative structure", caption: "Narrative story map" },
+      { src: "/units/f451-firemen.jpg",     alt: "Illustration of firemen in uniform with '451' on their helmets", caption: "The firemen of Fahrenheit 451" },
+      { src: "/units/f451-salamander.jpg",  alt: "A fire salamander — the symbol of the firemen in Bradbury's novel", caption: "The salamander symbol" },
+      { src: "/units/f451-sieve-sand.jpg",  alt: "Ink illustration of sand pouring through a sieve — Montag's metaphor for trying to memorize the Bible", caption: "The sieve and the sand" },
+      { src: "/units/f451-dentifrice.jpg",  alt: "Denham's Dentifrice advertisement still — the jingle that drowns out Montag's attempt at memorization", caption: "Denham's Dentifrice scene" },
+      { src: "/units/f451-lit-devices.png", alt: "Literary devices reference chart used in class: theme, motif, symbol, metaphor, simile, allusion, and more", caption: "Literary devices chart" },
+      { src: "/units/plot-diagram.jpg",     alt: "Plot diagram handout with definitions for each story element", caption: "Story elements diagram" },
     ],
     scaffoldsTo: "Unit 2 · Poetry I",
   },
@@ -58,8 +61,8 @@ const units: Unit[] = [
     courseColor: "bg-violet-50 text-violet-700 ring-1 ring-violet-200",
     title: "Unit 3 · Longer Fiction or Drama I: Hamlet",
     duration: "~3.5 weeks",
-    heroImage: "/units/castle-lit.jpg",
-    heroAlt: "Atmospheric castle in stormy weather — evoking the world of Hamlet and Shakespearean drama",
+    heroImage: "/units/dark-river.jpg",
+    heroAlt: "A lone figure with a light in a subterranean darkness — evoking Hamlet's world of uncertainty, secrets, and moral reckoning",
     essentialQuestions: [
       "How does Shakespeare use dramatic structure and language to accumulate meaning across a full play?",
       "What is the relationship between a character's choices and the text's central argument about mortality and action?",
@@ -79,8 +82,8 @@ const units: Unit[] = [
     courseColor: "bg-violet-50 text-violet-700 ring-1 ring-violet-200",
     title: "Units 4–6 · Second Rotation: Complexity & Ambiguity",
     duration: "~10 weeks",
-    heroImage: "/units/dragon-fantasy.jpg",
-    heroAlt: "A dragon soaring over mountains — evoking imagination, power, and the complexity of great literature",
+    heroImage: "/units/f451-annotation.jpg",
+    heroAlt: "Annotation guide — circling key words, marking big ideas, drawing arrows between related concepts — the close reading work at the heart of sophisticated literary analysis",
     essentialQuestions: [
       "How do authors use ambiguity and complexity to resist easy interpretation?",
       "What makes an analytical claim 'sophisticated' rather than merely accurate?",
@@ -250,8 +253,8 @@ const units: Unit[] = [
     courseColor: "bg-rose-50 text-rose-700 ring-1 ring-rose-200",
     title: "Unit 4 · The Poetry Project: Form, Voice & Meaning",
     duration: "~4 weeks",
-    heroImage: "/units/castle-lit.jpg",
-    heroAlt: "Atmospheric castle in the rain — the dramatic, layered world of poetry",
+    heroImage: "/units/poetry-pen.jpg",
+    heroAlt: "A fountain pen resting on handwritten verse — the craft of reading and writing poetry",
     essentialQuestions: [
       "How do poets use form and structure as expressive tools?",
       "What is the relationship between a poem's sonic qualities and its meaning?",
@@ -264,6 +267,10 @@ const units: Unit[] = [
     ],
     skills: "Prosody, scansion, sonnet forms, comparative analysis, creative writing with annotation",
     scaffoldsFrom: "Unit 3 · Building a Great Story",
+    gallery: [
+      { src: "/units/poetry-sonnet.jpg", alt: "Slide showing The New Colossus annotated as a Petrarchan sonnet — octave and sestet labeled with rhyme scheme", caption: "Petrarchan sonnet analysis" },
+      { src: "/units/poetry-meter.jpg",  alt: "Slide on poetic meter: monometer through octameter with foot definitions", caption: "Poetic meter reference" },
+    ],
   },
 
   // ── 8th Grade English ──────────────────────────────────────────────────────
@@ -285,9 +292,11 @@ const units: Unit[] = [
     ],
     skills: "Elements of fiction, characterization, narrative essay, grammar fundamentals",
     gallery: [
-      { src: "/units/plot-diagram.jpg",     alt: "Plot diagram with story element definitions — classroom handout", caption: "Story elements reference" },
-      { src: "/units/story-map.jpg",        alt: "Story map graphic organizer for narrative planning", caption: "Story map organizer" },
-      { src: "/units/transition-words.jpg", alt: "Transition words and phrases reference chart", caption: "Transitions chart" },
+      { src: "/units/elements-steal.jpg",          alt: "STEAL characterization chart: Speech, Thoughts, Effect on others, Actions, Looks", caption: "STEAL characterization method" },
+      { src: "/units/elements-student-project.jpg",alt: "Student characterization project showing direct and indirect characterization of a character", caption: "Student characterization project" },
+      { src: "/units/plot-diagram.jpg",             alt: "Plot diagram with story element definitions — classroom handout", caption: "Story elements reference" },
+      { src: "/units/story-map.jpg",                alt: "Story map graphic organizer for narrative planning", caption: "Story map organizer" },
+      { src: "/units/transition-words.jpg",         alt: "Transition words and phrases reference chart", caption: "Transitions chart" },
     ],
     scaffoldsTo: "Trimester 2 · Dramatic Irony & Persuasion",
   },
@@ -320,8 +329,8 @@ const units: Unit[] = [
     courseColor: "bg-emerald-50 text-emerald-700 ring-1 ring-emerald-200",
     title: "Trimester 3 · Language & Power: The Tempest & Poetry",
     duration: "13 weeks",
-    heroImage: "/units/castle-lit.jpg",
-    heroAlt: "A castle in stormy weather — the atmosphere of Shakespeare's The Tempest",
+    heroImage: "/units/tempest-miranda.jpg",
+    heroAlt: "Waterhouse's Miranda watching the tempest shipwreck — the opening scene of Shakespeare's play",
     essentialQuestions: [
       "How does Shakespeare use language, power, and magic to explore justice and forgiveness?",
       "How do form and structure in poetry create layers of meaning?",
@@ -334,6 +343,11 @@ const units: Unit[] = [
     ],
     skills: "Shakespearean drama, elements of poetry, iambic pentameter, comparative essay, advanced syntax",
     scaffoldsFrom: "Trimester 2 · The Glass Menagerie",
+    gallery: [
+      { src: "/units/tempest-ariel.jpg",  alt: "Edmund Dulac illustration of Ariel commanding the storm over Prospero's enemies", caption: "Ariel and the tempest" },
+      { src: "/units/poetry-sonnet.jpg",  alt: "Annotated Petrarchan sonnet slide used in the poetry unit", caption: "Sonnet form analysis" },
+      { src: "/units/poetry-meter.jpg",   alt: "Poetic meter reference slide: monometer through octameter", caption: "Poetic meter reference" },
+    ],
   },
 
   // ── SSAT Prep ──────────────────────────────────────────────────────────────
