@@ -7,17 +7,28 @@ interface Star {
   y: number;
   radius: number;
   maxOpacity: number;
-  cycleDuration: number; // ms for a full wink cycle
-  timeOffset: number;    // stagger so they don't all sync
+  cycleDuration: number;
+  timeOffset: number;
 }
 
-// Returns opacity 0→1→0→0 over one normalised cycle [0,1]
-// Fade in: 0–15%, hold: 15–30%, fade out: 30–45%, dark: 45–100%
+interface ShootingStar {
+  startX: number;
+  startY: number;
+  dx: number;
+  dy: number;
+  speed: number;       // px/ms
+  trailLength: number; // px
+  startTime: number;
+  duration: number;    // ms
+}
+
+// Star is visible ~92% of its cycle — dark only 8%
+// This keeps ≥80% of stars on screen at all times given random phases
 function winkEnvelope(phase: number): number {
-  if (phase < 0.15)  return phase / 0.15;
-  if (phase < 0.30)  return 1;
-  if (phase < 0.45)  return 1 - (phase - 0.30) / 0.15;
-  return 0;
+  if (phase < 0.08) return phase / 0.08;                     // fade in
+  if (phase < 0.84) return 1;                                 // hold
+  if (phase < 0.92) return 1 - (phase - 0.84) / 0.08;       // fade out
+  return 0;                                                    // brief dark
 }
 
 export default function StarField() {
@@ -31,6 +42,8 @@ export default function StarField() {
 
     let rafId: number;
     let stars: Star[] = [];
+    let shootingStar: ShootingStar | null = null;
+    let nextShootTime = 0; // set on first frame
 
     function createStars() {
       const count = Math.floor((canvas!.width * canvas!.height) / 13000);
@@ -38,42 +51,130 @@ export default function StarField() {
         x: Math.random() * canvas!.width,
         y: Math.random() * canvas!.height,
         radius: Math.random() * 0.9 + 0.25,
-        maxOpacity: Math.random() * 0.35 + 0.12,   // very subtle: 0.12–0.47
-        cycleDuration: (Math.random() * 14 + 8) * 1000, // 8–22 seconds
-        timeOffset: Math.random() * 30000,           // spread starts across 30s
+        maxOpacity: Math.random() * 0.35 + 0.12,
+        cycleDuration: (Math.random() * 10 + 6) * 1000, // 6–16 s
+        timeOffset: Math.random() * 25000,
       }));
     }
 
+    function scheduleNext(now: number) {
+      nextShootTime = now + (45 + Math.random() * 75) * 1000; // 45–120 s
+    }
+
+    function spawnShootingStar(now: number) {
+      const w = canvas!.width;
+      const h = canvas!.height;
+
+      // Start along top edge or upper-left portion of left edge
+      const fromTop = Math.random() > 0.35;
+      const startX = fromTop ? Math.random() * w * 0.65 : 0;
+      const startY = fromTop ? 0 : Math.random() * h * 0.45;
+
+      // Angle 20–40° below horizontal → travels right and slightly down
+      const angle = (20 + Math.random() * 20) * (Math.PI / 180);
+
+      // Travel 50–75% of screen width over 1.0–1.4 s
+      const travelDist = w * (0.5 + Math.random() * 0.25);
+      const duration   = 1000 + Math.random() * 400;
+
+      shootingStar = {
+        startX,
+        startY,
+        dx: Math.cos(angle),
+        dy: Math.sin(angle),
+        speed: travelDist / duration,
+        trailLength: travelDist * (0.14 + Math.random() * 0.06),
+        startTime: now,
+        duration,
+      };
+    }
+
+    function drawShootingStar(now: number) {
+      if (!shootingStar) return;
+      const s = shootingStar;
+      const elapsed  = now - s.startTime;
+      const progress = elapsed / s.duration;
+
+      if (progress >= 1) { shootingStar = null; return; }
+
+      // Opacity envelope: fade in 10%, full 10–80%, fade out 20%
+      let alpha: number;
+      if      (progress < 0.10) alpha = progress / 0.10;
+      else if (progress < 0.80) alpha = 1;
+      else                       alpha = 1 - (progress - 0.80) / 0.20;
+      alpha *= 0.80;
+
+      const dist  = elapsed * s.speed;
+      const headX = s.startX + s.dx * dist;
+      const headY = s.startY + s.dy * dist;
+      const tailX = headX - s.dx * s.trailLength;
+      const tailY = headY - s.dy * s.trailLength;
+
+      // Trail: transparent tail → blue mid → bright blue-white head
+      const trail = ctx!.createLinearGradient(tailX, tailY, headX, headY);
+      trail.addColorStop(0,    `rgba(43,  96,  222, 0)`);
+      trail.addColorStop(0.45, `rgba(80,  140, 255, ${alpha * 0.35})`);
+      trail.addColorStop(0.80, `rgba(160, 205, 255, ${alpha * 0.75})`);
+      trail.addColorStop(1,    `rgba(220, 238, 255, ${alpha})`);
+
+      ctx!.save();
+      ctx!.beginPath();
+      ctx!.moveTo(tailX, tailY);
+      ctx!.lineTo(headX, headY);
+      ctx!.strokeStyle = trail;
+      ctx!.lineWidth = 1.5;
+      ctx!.lineCap = "round";
+      ctx!.stroke();
+
+      // Tiny bright glow at the head
+      const glow = ctx!.createRadialGradient(headX, headY, 0, headX, headY, 3.5);
+      glow.addColorStop(0,   `rgba(235, 248, 255, ${alpha})`);
+      glow.addColorStop(0.4, `rgba(140, 195, 255, ${alpha * 0.55})`);
+      glow.addColorStop(1,   `rgba(80,  140, 255, 0)`);
+      ctx!.beginPath();
+      ctx!.arc(headX, headY, 3.5, 0, Math.PI * 2);
+      ctx!.fillStyle = glow;
+      ctx!.fill();
+
+      ctx!.restore();
+    }
+
     function resize() {
-      canvas!.width = window.innerWidth;
+      canvas!.width  = window.innerWidth;
       canvas!.height = window.innerHeight;
       createStars();
     }
 
-    function draw(time: number) {
+    function draw(now: number) {
       ctx!.clearRect(0, 0, canvas!.width, canvas!.height);
 
+      if (nextShootTime === 0) scheduleNext(now);
+
+      if (!shootingStar && now >= nextShootTime) {
+        spawnShootingStar(now);
+        scheduleNext(now);
+      }
+
+      // Draw stars
       for (const star of stars) {
-        const phase = ((time + star.timeOffset) % star.cycleDuration) / star.cycleDuration;
+        const phase   = ((now + star.timeOffset) % star.cycleDuration) / star.cycleDuration;
         const opacity = star.maxOpacity * winkEnvelope(phase);
-        if (opacity < 0.008) continue; // skip fully dark stars
+        if (opacity < 0.008) continue;
 
-        const r = star.radius;
-        const glowR = r * 4.5;
-
-        // Slightly blue-tinted star: pale blue-white core, soft blue outer glow
-        const grad = ctx!.createRadialGradient(star.x, star.y, 0, star.x, star.y, glowR);
-        grad.addColorStop(0,    `rgba(210, 228, 255, ${opacity})`);
-        grad.addColorStop(0.2,  `rgba(190, 215, 255, ${opacity * 0.7})`);
-        grad.addColorStop(0.55, `rgba(160, 200, 255, ${opacity * 0.25})`);
-        grad.addColorStop(1,    `rgba(140, 185, 255, 0)`);
+        const glowR = star.radius * 4.5;
+        const g = ctx!.createRadialGradient(star.x, star.y, 0, star.x, star.y, glowR);
+        g.addColorStop(0,    `rgba(212, 228, 255, ${opacity})`);
+        g.addColorStop(0.22, `rgba(190, 215, 255, ${opacity * 0.68})`);
+        g.addColorStop(0.55, `rgba(162, 200, 255, ${opacity * 0.24})`);
+        g.addColorStop(1,    `rgba(140, 185, 255, 0)`);
 
         ctx!.beginPath();
         ctx!.arc(star.x, star.y, glowR, 0, Math.PI * 2);
-        ctx!.fillStyle = grad;
+        ctx!.fillStyle = g;
         ctx!.fill();
       }
 
+      drawShootingStar(now);
       rafId = requestAnimationFrame(draw);
     }
 
