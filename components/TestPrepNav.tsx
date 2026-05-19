@@ -19,8 +19,8 @@ export default function TestPrepNav() {
       }}
     >
       <div
-        className="mx-auto max-w-[960px] px-6 flex gap-2"
-        style={{ paddingTop: 14, paddingBottom: 14 }}
+        className="mx-auto max-w-[960px] px-6 flex gap-4"
+        style={{ paddingTop: 24, paddingBottom: 24 }}
       >
         {tabs.map(({ href, label }) => (
           <Link
@@ -29,11 +29,11 @@ export default function TestPrepNav() {
             style={{
               display: "inline-flex",
               alignItems: "center",
-              padding: "8px 18px",
+              padding: "16px 40px",
               borderRadius: 999,
-              fontSize: 13,
-              fontWeight: pathname === href ? 500 : 400,
-              letterSpacing: "-0.005em",
+              fontSize: 18,
+              fontWeight: pathname === href ? 600 : 400,
+              letterSpacing: "-0.01em",
               textDecoration: "none",
               transition: "color 180ms ease, border-color 180ms ease, background 180ms ease",
               ...(pathname === href
