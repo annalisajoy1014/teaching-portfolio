@@ -39,11 +39,16 @@ export default function OverviewPage() {
 
             <h1
               className="font-display"
-              style={{ fontSize: "clamp(52px, 7vw, 96px)", lineHeight: 0.96, marginBottom: 32 }}
+              style={{ fontSize: "clamp(52px, 7vw, 96px)", lineHeight: 0.96, marginBottom: 16, color: "var(--ink)", whiteSpace: "nowrap" }}
             >
-              Annalisa{" "}
-              <em className="accent">Ard</em>
+              Annalisa Ard
             </h1>
+            <p
+              className="font-display"
+              style={{ fontSize: "clamp(16px, 1.8vw, 26px)", fontStyle: "italic", color: "#2B60DE", marginBottom: 28, letterSpacing: "-0.01em" }}
+            >
+              Helping students to shoot for the stars
+            </p>
 
             <p
               style={{
