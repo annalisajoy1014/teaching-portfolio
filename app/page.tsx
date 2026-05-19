@@ -45,7 +45,7 @@ export default function OverviewPage() {
             </h1>
             <p
               className="font-display"
-              style={{ fontSize: "clamp(18px, 2.1vw, 30px)", fontStyle: "italic", color: "#2B60DE", marginBottom: 28, letterSpacing: "-0.01em" }}
+              style={{ fontSize: "clamp(21px, 2.4vw, 35px)", fontStyle: "italic", color: "#2B60DE", marginBottom: 28, letterSpacing: "-0.01em" }}
             >
               Helping students to shoot for the stars
             </p>
