@@ -9,7 +9,6 @@ const links = [
   { href: "/units", label: "Unit Overview" },
   { href: "/test-prep", label: "Test Prep" },
   { href: "/recommendations", label: "References" },
-  { href: "/contact", label: "Contact" },
 ];
 
 export default function Nav() {

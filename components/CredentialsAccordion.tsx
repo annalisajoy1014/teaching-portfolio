@@ -131,16 +131,12 @@ export default function CredentialsAccordion() {
     <div>
       <AccordionRow
         index="01"
-        label="Degrees"
+        label="Degrees and Certifications"
         items={[
           "MA in TESOL — Vancouver Island University",
           "BA in English — California State University, San Bernardino",
+          "TESOL Certificate — International TEFL Academy",
         ]}
-      />
-      <StaticRow
-        index="03"
-        label="Certification"
-        value="TESOL Certificate — International TEFL Academy"
       />
       <AccordionRow
         index="04"
