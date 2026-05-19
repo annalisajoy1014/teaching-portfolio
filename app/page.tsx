@@ -86,20 +86,13 @@ export default function OverviewPage() {
 
           {/* Right: photo + definition list */}
           <div>
-            <div
-              className="relative w-full overflow-hidden mb-8"
-              style={{
-                aspectRatio: "4/5",
-                borderRadius: 4,
-                border: "1px solid var(--hair)",
-                maxHeight: 360,
-              }}
-            >
+            <div className="mb-8" style={{ borderRadius: 4, border: "1px solid var(--hair)", overflow: "hidden" }}>
               <Image
                 src="/annalisa-ard.jpg"
                 alt="Annalisa Ard"
-                fill
-                className="object-cover object-top"
+                width={1167}
+                height={1160}
+                style={{ width: "100%", height: "auto", display: "block" }}
                 priority
               />
             </div>
