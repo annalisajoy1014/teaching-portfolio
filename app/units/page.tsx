@@ -412,13 +412,19 @@ export default function UnitsPage() {
   }));
 
   return (
-    <div className="mx-auto max-w-4xl px-6 py-20">
-      <header className="mb-14">
-        <h1 className="text-4xl font-bold tracking-tight">Unit Overview</h1>
-        <p className="mt-4 max-w-2xl text-zinc-500 leading-relaxed">
+    <div className="mx-auto max-w-[960px] px-6" style={{ paddingTop: 96, paddingBottom: 120 }}>
+      <header className="mb-16">
+        <p className="eyebrow mb-8">Unit Overview</p>
+        <h1
+          className="font-display"
+          style={{ fontSize: "clamp(36px, 5vw, 56px)", lineHeight: 1.05, marginBottom: 20 }}
+        >
+          Every unit, start to <em className="accent">finish.</em>
+        </h1>
+        <p style={{ maxWidth: 560, color: "var(--muted)", fontSize: 17, lineHeight: 1.65, letterSpacing: "-0.005em" }}>
           A macroscopic view of every unit I have planned — organized by course,
-          sequenced from start to finish. Click any unit to explore the full
-          details, materials, and scaffolding.
+          sequenced from start to finish. Click any unit to explore details,
+          materials, and scaffolding.
         </p>
       </header>
 

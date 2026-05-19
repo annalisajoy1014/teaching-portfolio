@@ -12,17 +12,42 @@ export default function TestPrepNav() {
   const pathname = usePathname();
 
   return (
-    <div className="border-b border-zinc-100 bg-zinc-50">
-      <div className="mx-auto max-w-4xl px-6 py-3 flex gap-2">
+    <div
+      style={{
+        borderBottom: "1px solid var(--hair)",
+        background: "var(--bg)",
+      }}
+    >
+      <div
+        className="mx-auto max-w-[960px] px-6 flex gap-2"
+        style={{ paddingTop: 14, paddingBottom: 14 }}
+      >
         {tabs.map(({ href, label }) => (
           <Link
             key={href}
             href={href}
-            className={`rounded-full px-4 py-1.5 text-sm font-medium transition-colors ${
-              pathname === href
-                ? "bg-zinc-900 text-white"
-                : "text-zinc-500 hover:text-zinc-900 hover:bg-zinc-100"
-            }`}
+            style={{
+              display: "inline-flex",
+              alignItems: "center",
+              padding: "8px 18px",
+              borderRadius: 999,
+              fontSize: 13,
+              fontWeight: pathname === href ? 500 : 400,
+              letterSpacing: "-0.005em",
+              textDecoration: "none",
+              transition: "color 180ms ease, border-color 180ms ease, background 180ms ease",
+              ...(pathname === href
+                ? {
+                    background: "var(--ink)",
+                    color: "var(--bg)",
+                    border: "1px solid transparent",
+                  }
+                : {
+                    background: "transparent",
+                    color: "var(--muted)",
+                    border: "1px solid var(--hair)",
+                  }),
+            }}
           >
             {label}
           </Link>

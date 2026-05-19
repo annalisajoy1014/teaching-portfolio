@@ -24,78 +24,157 @@ export type GroupedCourse = {
   units: Unit[];
 };
 
+/* Course label colors mapped to dark-palette badges */
+const BADGE: Record<string, { bg: string; text: string; ring: string }> = {
+  "AP Literature":    { bg: "rgba(167,139,250,0.12)", text: "#a78bfa",  ring: "rgba(167,139,250,0.25)" },
+  "AP Language":      { bg: "rgba(96,165,250,0.10)",  text: "#60a5fa",  ring: "rgba(96,165,250,0.22)"  },
+  "Honors Literature":{ bg: "rgba(251,113,133,0.10)", text: "#fb7185",  ring: "rgba(251,113,133,0.22)" },
+  "8th Grade English":{ bg: "rgba(52,211,153,0.10)",  text: "#34d399",  ring: "rgba(52,211,153,0.22)"  },
+  "SSAT Prep":        { bg: "rgba(251,191,36,0.10)",  text: "#fbbf24",  ring: "rgba(251,191,36,0.22)"  },
+};
+
+function CourseBadge({ course }: { course: string }) {
+  const c = BADGE[course] ?? { bg: "rgba(255,255,255,0.06)", text: "var(--muted)", ring: "rgba(255,255,255,0.12)" };
+  return (
+    <span
+      style={{
+        display: "inline-block",
+        background: c.bg,
+        color: c.text,
+        border: `1px solid ${c.ring}`,
+        borderRadius: 999,
+        fontSize: 11,
+        letterSpacing: "0.1em",
+        textTransform: "uppercase",
+        fontWeight: 500,
+        padding: "3px 10px",
+      }}
+    >
+      {course}
+    </span>
+  );
+}
+
 export default function UnitsGallery({ grouped }: { grouped: GroupedCourse[] }) {
   const [openUnit, setOpenUnit] = useState<string | null>(null);
 
   return (
-    <div className="space-y-16">
-      {grouped.map(({ course, color, units }) => (
+    <div style={{ display: "flex", flexDirection: "column", gap: 64 }}>
+      {grouped.map(({ course, units }) => (
         <section key={course}>
-          <div className="flex items-center gap-3 mb-6">
-            <span className={`rounded-full px-3 py-1 text-xs font-medium ${color}`}>
-              {course}
-            </span>
-            <span className="text-sm text-zinc-400">
+          {/* Course header */}
+          <div
+            className="flex items-center gap-3 mb-6"
+          >
+            <CourseBadge course={course} />
+            <span style={{ fontSize: 13, color: "var(--faint)" }}>
               {units.length} unit{units.length !== 1 ? "s" : ""}
             </span>
           </div>
 
+          {/* Timeline spine */}
           <div className="relative">
-            <div className="absolute left-4 top-0 bottom-0 w-px bg-zinc-100 hidden sm:block" />
-
-            <div className="space-y-4">
+            <div
+              className="absolute left-4 top-0 bottom-0 hidden sm:block"
+              style={{ width: 1, background: "var(--hair)" }}
+            />
+            <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
               {units.map((unit) => {
                 const isOpen = openUnit === unit.title;
                 return (
                   <div key={unit.title} className="sm:pl-12 relative">
-                    <div className="absolute left-3 top-6 h-2.5 w-2.5 rounded-full border-2 border-zinc-300 bg-white hidden sm:block" />
+                    {/* Timeline dot */}
+                    <div
+                      className="absolute hidden sm:block"
+                      style={{
+                        left: 11,
+                        top: 22,
+                        width: 8,
+                        height: 8,
+                        borderRadius: "50%",
+                        border: "1.5px solid var(--faint)",
+                        background: isOpen ? "var(--purple)" : "var(--bg)",
+                        transition: "background 180ms ease",
+                      }}
+                    />
 
                     <div
-                      className={`rounded-2xl border overflow-hidden transition-all duration-200 ${
-                        isOpen ? "border-zinc-300 shadow-sm" : "border-zinc-200"
-                      }`}
+                      style={{
+                        borderRadius: 2,
+                        border: `1px solid ${isOpen ? "rgba(255,255,255,0.14)" : "var(--hair)"}`,
+                        overflow: "hidden",
+                        transition: "border-color 180ms ease",
+                        background: "var(--bg)",
+                      }}
                     >
-                      {/* ── Collapsed header (always visible) ── */}
+                      {/* Collapsed header */}
                       <button
                         onClick={() => setOpenUnit(isOpen ? null : unit.title)}
                         className="w-full text-left"
                         aria-expanded={isOpen}
+                        style={{ background: "none", border: "none", cursor: "pointer", padding: 0 }}
                       >
-                        <div className="flex items-stretch gap-0">
-                          {/* Thumbnail */}
+                        <div style={{ display: "flex", alignItems: "stretch" }}>
                           {unit.heroImage && (
-                            <div className="relative w-28 sm:w-40 shrink-0 bg-zinc-100">
+                            <div
+                              className="relative shrink-0 hidden sm:block"
+                              style={{ width: 128, background: "var(--bg-raised)" }}
+                            >
                               <Image
                                 src={unit.heroImage}
                                 alt={unit.heroAlt ?? unit.title}
                                 fill
                                 className="object-cover"
-                                sizes="160px"
+                                sizes="128px"
                               />
                             </div>
                           )}
-
-                          {/* Preview text */}
-                          <div className="flex-1 px-5 py-4 flex items-start justify-between gap-4">
-                            <div className="min-w-0">
-                              <div className="flex flex-wrap items-center gap-2 mb-1">
-                                <h3 className="font-semibold text-zinc-900 leading-snug text-sm sm:text-base">
+                          <div
+                            style={{
+                              flex: 1,
+                              padding: "18px 20px",
+                              display: "flex",
+                              alignItems: "flex-start",
+                              justifyContent: "space-between",
+                              gap: 16,
+                            }}
+                          >
+                            <div style={{ minWidth: 0 }}>
+                              <div style={{ display: "flex", flexWrap: "wrap", alignItems: "center", gap: 8, marginBottom: 4 }}>
+                                <h3
+                                  className="font-display"
+                                  style={{ fontSize: 17, color: "var(--ink)", lineHeight: 1.3 }}
+                                >
                                   {unit.title}
                                 </h3>
-                                <span className="text-xs text-zinc-400 whitespace-nowrap">
+                                <span style={{ fontSize: 12, color: "var(--faint)", whiteSpace: "nowrap" }}>
                                   {unit.duration}
                                 </span>
                               </div>
-                              <p className="text-xs sm:text-sm text-zinc-500 leading-relaxed line-clamp-2">
+                              <p
+                                style={{
+                                  fontSize: 14,
+                                  color: "var(--muted)",
+                                  lineHeight: 1.55,
+                                  overflow: "hidden",
+                                  display: "-webkit-box",
+                                  WebkitLineClamp: 2,
+                                  WebkitBoxOrient: "vertical",
+                                }}
+                              >
                                 {unit.essentialQuestions[0]}
                               </p>
                             </div>
                             <span
-                              className={`shrink-0 mt-0.5 text-zinc-400 transition-transform duration-200 ${
-                                isOpen ? "rotate-180" : ""
-                              }`}
+                              style={{
+                                color: "var(--faint)",
+                                transition: "transform 200ms ease",
+                                transform: isOpen ? "rotate(180deg)" : "none",
+                                flexShrink: 0,
+                                marginTop: 2,
+                              }}
                             >
-                              <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                              <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor">
                                 <path d="M8 10.414L2.293 4.707 1 6l7 7 7-7-1.293-1.293L8 10.414z" />
                               </svg>
                             </span>
@@ -103,12 +182,12 @@ export default function UnitsGallery({ grouped }: { grouped: GroupedCourse[] }) 
                         </div>
                       </button>
 
-                      {/* ── Expanded panel ── */}
+                      {/* Expanded panel */}
                       {isOpen && (
-                        <div className="border-t border-zinc-100">
+                        <div style={{ borderTop: "1px solid var(--hair)" }}>
                           {/* Hero image */}
                           {unit.heroImage && (
-                            <div className="relative h-52 sm:h-72 w-full">
+                            <div className="relative w-full" style={{ height: 220 }}>
                               <Image
                                 src={unit.heroImage}
                                 alt={unit.heroAlt ?? unit.title}
@@ -116,25 +195,55 @@ export default function UnitsGallery({ grouped }: { grouped: GroupedCourse[] }) 
                                 className="object-cover"
                                 sizes="(max-width: 896px) 100vw, 896px"
                               />
-                              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent" />
-                              <div className="absolute bottom-0 left-0 p-6">
-                                <h3 className="text-white font-bold text-xl sm:text-2xl leading-snug drop-shadow">
+                              <div
+                                style={{
+                                  position: "absolute",
+                                  inset: 0,
+                                  background: "linear-gradient(to top, rgba(10,10,10,0.85) 0%, rgba(10,10,10,0.2) 60%, transparent 100%)",
+                                }}
+                              />
+                              <div style={{ position: "absolute", bottom: 0, left: 0, padding: "24px" }}>
+                                <h3
+                                  className="font-display"
+                                  style={{ fontSize: 22, color: "var(--ink)", lineHeight: 1.15 }}
+                                >
                                   {unit.title}
                                 </h3>
-                                <p className="text-white/70 text-sm mt-1">{unit.duration}</p>
+                                <p style={{ fontSize: 13, color: "rgba(245,245,245,0.55)", marginTop: 4 }}>
+                                  {unit.duration}
+                                </p>
                               </div>
                             </div>
                           )}
 
-                          {/* Details */}
-                          <div className="p-6 grid gap-6 sm:grid-cols-2">
+                          {/* Details grid */}
+                          <div
+                            style={{
+                              padding: "28px 24px",
+                              display: "grid",
+                              gap: 28,
+                              gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))",
+                            }}
+                          >
                             <div>
-                              <p className="text-xs font-medium uppercase tracking-wide text-zinc-400 mb-3">
+                              <p
+                                style={{
+                                  fontSize: 11,
+                                  letterSpacing: "0.16em",
+                                  textTransform: "uppercase",
+                                  color: "var(--faint)",
+                                  marginBottom: 12,
+                                  fontFamily: "var(--font-sans)",
+                                }}
+                              >
                                 Essential Questions
                               </p>
-                              <ul className="space-y-2">
+                              <ul style={{ display: "flex", flexDirection: "column", gap: 8 }}>
                                 {unit.essentialQuestions.map((q, i) => (
-                                  <li key={i} className="text-sm text-zinc-600 leading-relaxed">
+                                  <li
+                                    key={i}
+                                    style={{ fontSize: 14, color: "var(--muted)", lineHeight: 1.6 }}
+                                  >
                                     {q}
                                   </li>
                                 ))}
@@ -142,13 +251,31 @@ export default function UnitsGallery({ grouped }: { grouped: GroupedCourse[] }) 
                             </div>
 
                             <div>
-                              <p className="text-xs font-medium uppercase tracking-wide text-zinc-400 mb-3">
+                              <p
+                                style={{
+                                  fontSize: 11,
+                                  letterSpacing: "0.16em",
+                                  textTransform: "uppercase",
+                                  color: "var(--faint)",
+                                  marginBottom: 12,
+                                  fontFamily: "var(--font-sans)",
+                                }}
+                              >
                                 Learning Objectives
                               </p>
-                              <ul className="space-y-2">
+                              <ul style={{ display: "flex", flexDirection: "column", gap: 8 }}>
                                 {unit.objectives.map((o, i) => (
-                                  <li key={i} className="flex gap-2 text-sm text-zinc-600 leading-relaxed">
-                                    <span className="text-zinc-300 mt-0.5 shrink-0">›</span>
+                                  <li
+                                    key={i}
+                                    style={{
+                                      display: "flex",
+                                      gap: 8,
+                                      fontSize: 14,
+                                      color: "var(--muted)",
+                                      lineHeight: 1.6,
+                                    }}
+                                  >
+                                    <span style={{ color: "var(--faint)", flexShrink: 0, marginTop: 2 }}>›</span>
                                     {o}
                                   </li>
                                 ))}
@@ -156,10 +283,20 @@ export default function UnitsGallery({ grouped }: { grouped: GroupedCourse[] }) 
                             </div>
                           </div>
 
-                          {/* Skills + scaffolding */}
-                          <div className="px-6 pb-5 pt-0 border-t border-zinc-100 flex flex-wrap gap-x-6 gap-y-2 text-xs text-zinc-400">
+                          {/* Skills + scaffolding row */}
+                          <div
+                            style={{
+                              padding: "16px 24px",
+                              borderTop: "1px solid var(--hair)",
+                              display: "flex",
+                              flexWrap: "wrap",
+                              gap: "8px 24px",
+                              fontSize: 13,
+                              color: "var(--faint)",
+                            }}
+                          >
                             <span>
-                              <span className="font-medium text-zinc-500">Skills: </span>
+                              <span style={{ color: "var(--muted)", fontWeight: 500 }}>Skills: </span>
                               {unit.skills}
                             </span>
                             {unit.scaffoldsFrom && (
@@ -172,23 +309,61 @@ export default function UnitsGallery({ grouped }: { grouped: GroupedCourse[] }) 
 
                           {/* Gallery */}
                           {unit.gallery && unit.gallery.length > 0 && (
-                            <div className="px-6 pb-6 border-t border-zinc-100 pt-5">
-                              <p className="text-xs font-medium uppercase tracking-wide text-zinc-400 mb-3">
-                                Teaching Materials & Resources
+                            <div style={{ padding: "20px 24px", borderTop: "1px solid var(--hair)" }}>
+                              <p
+                                style={{
+                                  fontSize: 11,
+                                  letterSpacing: "0.16em",
+                                  textTransform: "uppercase",
+                                  color: "var(--faint)",
+                                  marginBottom: 12,
+                                  fontFamily: "var(--font-sans)",
+                                }}
+                              >
+                                Teaching Materials
                               </p>
-                              <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                              <div
+                                style={{
+                                  display: "grid",
+                                  gridTemplateColumns: "repeat(auto-fill, minmax(160px, 1fr))",
+                                  gap: 8,
+                                }}
+                              >
                                 {unit.gallery.map(({ src, alt, caption }, i) => (
-                                  <div key={i} className="group relative rounded-xl overflow-hidden bg-zinc-100 aspect-[4/3]">
+                                  <div
+                                    key={i}
+                                    style={{
+                                      position: "relative",
+                                      aspectRatio: "4/3",
+                                      overflow: "hidden",
+                                      background: "var(--bg-raised)",
+                                      borderRadius: 2,
+                                    }}
+                                  >
                                     <Image
                                       src={src}
                                       alt={alt}
                                       fill
-                                      className="object-cover transition-transform duration-300 group-hover:scale-105"
-                                      sizes="(max-width: 640px) 50vw, 30vw"
+                                      className="object-cover"
+                                      sizes="(max-width: 640px) 50vw, 25vw"
+                                      style={{ transition: "transform 300ms ease" }}
+                                      onMouseEnter={(e) => ((e.target as HTMLElement).style.transform = "scale(1.04)")}
+                                      onMouseLeave={(e) => ((e.target as HTMLElement).style.transform = "scale(1)")}
                                     />
                                     {caption && (
-                                      <div className="absolute bottom-0 inset-x-0 bg-black/50 px-2 py-1.5">
-                                        <p className="text-white text-xs leading-snug">{caption}</p>
+                                      <div
+                                        style={{
+                                          position: "absolute",
+                                          bottom: 0,
+                                          left: 0,
+                                          right: 0,
+                                          background: "rgba(10,10,10,0.75)",
+                                          padding: "6px 8px",
+                                        }}
+                                      >
+                                        <p style={{ fontSize: 11, color: "var(--muted)", lineHeight: 1.3 }}>
+                                          {caption}
+                                        </p>
                                       </div>
                                     )}
                                   </div>

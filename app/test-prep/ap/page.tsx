@@ -17,7 +17,7 @@ const apLitSections = [
   },
   {
     heading: "FRQ & Essay Preparation",
-    body: "All three FRQs are scored on a 6-point rubric with three rows: Row A (Thesis, 0–1 pt) requires a defensible interpretation — a statement of opinion plus the reason behind it (the 'OW!' framework: Opinion + Why). Row B (Evidence & Commentary, 0–4 pts) rewards specific textual evidence woven into well-organized analytical reasoning. Row C (Sophistication, 0–1 pt) recognizes arguments that situate the text in broader literary or cultural context, use comparison, or explore tensions within the work. Students practice Q1 (poetry analysis), Q2 (prose fiction analysis), and Q3 (literary argument) throughout the year with timed writes, peer scoring, and individual feedback.",
+    body: "All three FRQs are scored on a 6-point rubric with three rows: Row A (Thesis, 0–1 pt) requires a defensible interpretation — a statement of opinion plus the reason behind it (the 'OW!' framework: Opinion + Why). Row B (Evidence & Commentary, 0–4 pts) rewards specific textual evidence woven into well-organized analytical reasoning. Row C (Sophistication, 0–1 pt) recognizes arguments that situate the text in broader literary or cultural context, use comparison, or explore tensions within the work. Students practice Q1, Q2, and Q3 throughout the year with timed writes, peer scoring, and individual feedback.",
   },
   {
     heading: "Student Outcomes",
@@ -32,7 +32,7 @@ const apLangSections = [
   },
   {
     heading: "Rhetorical Analysis Framework",
-    body: "I anchor rhetorical analysis in the SOAPS framework (Subject, Occasion, Audience, Purpose, Speaker), which gives students a systematic way to situate any text before analyzing its choices. From there, students learn to identify and analyze the classical appeals — ethos, pathos, logos, and kairos — alongside specific stylistic devices: parallel structure, antithesis, anaphora, asyndeton, polysyndeton, and others drawn from the AP Lang sophistication notes. The key shift is from naming a device to explaining its effect on the audience and how it advances the writer's purpose.",
+    body: "I anchor rhetorical analysis in the SOAPS framework (Subject, Occasion, Audience, Purpose, Speaker), which gives students a systematic way to situate any text before analyzing its choices. From there, students learn to identify and analyze the classical appeals — ethos, pathos, logos, and kairos — alongside specific stylistic devices: parallel structure, antithesis, anaphora, asyndeton, polysyndeton, and others. The key shift is from naming a device to explaining its effect on the audience and how it advances the writer's purpose.",
   },
   {
     heading: "Key Texts & Sources",
@@ -40,7 +40,7 @@ const apLangSections = [
   },
   {
     heading: "Argument & Synthesis Writing",
-    body: "Students write all three FRQ types across the year. For the argument essay, they learn to take a defensible position, anticipate and address counterargument, and develop complexity — acknowledging nuance or exploring tensions rather than oversimplifying. For synthesis, they learn to read multiple sources quickly and critically, identify each source's perspective and potential bias, and integrate at least three sources into a coherent original argument. MLA citation and attribution are built in from the start.",
+    body: "Students write all three FRQ types across the year. For the argument essay, they learn to take a defensible position, anticipate and address counterargument, and develop complexity. For synthesis, they learn to read multiple sources quickly and critically, identify each source's perspective and potential bias, and integrate at least three sources into a coherent original argument. MLA citation and attribution are built in from the start.",
   },
   {
     heading: "Student Outcomes",
@@ -53,37 +53,76 @@ export default function APPage() {
   const sections = active === "lit" ? apLitSections : apLangSections;
 
   return (
-    <div className="mx-auto max-w-4xl px-6 py-16">
-      <header className="mb-10">
-        <h1 className="text-3xl font-bold tracking-tight">AP Classes</h1>
-        <p className="mt-3 max-w-2xl text-zinc-500 leading-relaxed">
-          An overview of my AP English courses — how they are structured, how I
-          prepare students for the exam, and the outcomes students achieve.
+    <div className="mx-auto max-w-[960px] px-6" style={{ paddingTop: 80, paddingBottom: 120 }}>
+      <header style={{ marginBottom: 56 }}>
+        <p className="eyebrow mb-8">Test Prep</p>
+        <h1
+          className="font-display"
+          style={{ fontSize: "clamp(36px, 5vw, 56px)", lineHeight: 1.05, marginBottom: 20 }}
+        >
+          AP English at the highest <em className="accent">level.</em>
+        </h1>
+        <p style={{ maxWidth: 560, color: "var(--muted)", fontSize: 17, lineHeight: 1.65, letterSpacing: "-0.005em" }}>
+          How I structure AP Literature and AP Language — from close reading tools
+          to FRQ preparation — and the outcomes students achieve.
         </p>
       </header>
 
       {/* AP Lit / AP Lang toggle */}
-      <div className="flex gap-2 mb-10">
+      <div style={{ display: "flex", gap: 8, marginBottom: 48 }}>
         {(["lit", "lang"] as const).map((tab) => (
           <button
             key={tab}
             onClick={() => setActive(tab)}
-            className={`rounded-full px-5 py-2 text-sm font-medium transition-colors ${
-              active === tab
-                ? "bg-zinc-900 text-white"
-                : "border border-zinc-200 text-zinc-600 hover:bg-zinc-50"
-            }`}
+            style={{
+              display: "inline-flex",
+              alignItems: "center",
+              padding: "10px 20px",
+              borderRadius: 999,
+              fontSize: 13,
+              fontWeight: active === tab ? 500 : 400,
+              cursor: "pointer",
+              letterSpacing: "-0.005em",
+              transition: "all 180ms ease",
+              border: "none",
+              ...(active === tab
+                ? { background: "var(--ink)", color: "var(--bg)" }
+                : {
+                    background: "transparent",
+                    color: "var(--muted)",
+                    outline: "1px solid var(--hair)",
+                  }),
+            }}
           >
             {tab === "lit" ? "AP Literature" : "AP Language"}
           </button>
         ))}
       </div>
 
-      <div className="space-y-8">
-        {sections.map(({ heading, body }) => (
-          <div key={heading} className="rounded-2xl border border-zinc-200 p-6">
-            <h2 className="font-semibold mb-3">{heading}</h2>
-            <p className="text-sm text-zinc-600 leading-relaxed">{body}</p>
+      {/* Section list */}
+      <div>
+        {sections.map(({ heading, body }, i) => (
+          <div
+            key={heading}
+            style={{
+              borderTop: "1px solid var(--hair)",
+              padding: "32px 0",
+              display: "grid",
+              gridTemplateColumns: "200px 1fr",
+              gap: 48,
+              alignItems: "start",
+            }}
+            className="block sm:grid"
+          >
+            <h2
+              className="font-display"
+              style={{ fontSize: 20, color: "var(--ink)", marginBottom: 12 }}
+            >
+              {heading}
+            </h2>
+            <p style={{ fontSize: 16, color: "var(--muted)", lineHeight: 1.7, letterSpacing: "-0.005em" }}>
+              {body}
+            </p>
           </div>
         ))}
       </div>

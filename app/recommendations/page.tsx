@@ -125,38 +125,89 @@ const references: Reference[] = [
 
 export default function ReferencesPage() {
   return (
-    <div className="mx-auto max-w-4xl px-6 py-20">
-      <header className="mb-14">
-        <h1 className="text-4xl font-bold tracking-tight">References & Reviews</h1>
-        <p className="mt-4 max-w-xl text-zinc-500 leading-relaxed">
+    <div className="mx-auto max-w-[960px] px-6" style={{ paddingTop: 96, paddingBottom: 120 }}>
+      <header style={{ marginBottom: 80 }}>
+        <p className="eyebrow mb-8">References &amp; Reviews</p>
+        <h1
+          className="font-display"
+          style={{ fontSize: "clamp(36px, 5vw, 56px)", lineHeight: 1.05, marginBottom: 20 }}
+        >
+          What colleagues say about <em className="accent">working together.</em>
+        </h1>
+        <p style={{ maxWidth: 520, color: "var(--muted)", fontSize: 17, lineHeight: 1.65, letterSpacing: "-0.005em" }}>
           Evaluations and letters of recommendation from supervisors, colleagues,
           and professional contacts who have observed my teaching firsthand.
         </p>
       </header>
 
-      <div className="space-y-10">
+      <div style={{ display: "flex", flexDirection: "column", gap: 1, background: "var(--hair)" }}>
         {references.map(
           ({ name, title, institution, context, wouldWorkAgain, rating, pullQuote, strengths, improvement, remarks, closing }) => (
-            <article key={name} className="rounded-2xl border border-zinc-200 overflow-hidden">
+            <article key={name} style={{ background: "var(--bg)" }}>
 
-              {/* Header */}
-              <div className="bg-zinc-50 border-b border-zinc-100 px-8 py-5 flex flex-wrap items-start justify-between gap-3">
+              {/* Header row */}
+              <div
+                style={{
+                  padding: "28px 32px",
+                  borderBottom: "1px solid var(--hair)",
+                  display: "flex",
+                  flexWrap: "wrap",
+                  alignItems: "flex-start",
+                  justifyContent: "space-between",
+                  gap: 16,
+                }}
+              >
                 <div>
-                  <p className="font-semibold text-zinc-900">{name}</p>
-                  <p className="text-sm text-zinc-500 mt-0.5">{title}</p>
-                  <p className="text-sm text-zinc-400">{institution}</p>
+                  <h2
+                    className="font-display"
+                    style={{ fontSize: 22, color: "var(--ink)", marginBottom: 4 }}
+                  >
+                    {name}
+                  </h2>
+                  <p style={{ fontSize: 14, color: "var(--muted)", marginBottom: 2 }}>{title}</p>
+                  <p style={{ fontSize: 13, color: "var(--faint)" }}>{institution}</p>
                 </div>
-                <div className="flex flex-wrap gap-2 justify-end">
-                  <span className="rounded-full bg-white border border-zinc-200 px-3 py-1 text-xs text-zinc-500 font-medium">
+                <div style={{ display: "flex", flexWrap: "wrap", gap: 8, justifyContent: "flex-end" }}>
+                  <span
+                    style={{
+                      padding: "4px 12px",
+                      borderRadius: 999,
+                      fontSize: 11,
+                      letterSpacing: "0.08em",
+                      textTransform: "uppercase",
+                      color: "var(--muted)",
+                      border: "1px solid var(--hair)",
+                    }}
+                  >
                     {context}
                   </span>
                   {wouldWorkAgain && (
-                    <span className="rounded-full bg-emerald-50 border border-emerald-200 px-3 py-1 text-xs text-emerald-700 font-medium">
+                    <span
+                      style={{
+                        padding: "4px 12px",
+                        borderRadius: 999,
+                        fontSize: 11,
+                        letterSpacing: "0.08em",
+                        textTransform: "uppercase",
+                        color: "var(--purple)",
+                        border: "1px solid rgba(167,139,250,0.3)",
+                      }}
+                    >
                       Would work together again
                     </span>
                   )}
                   {rating && (
-                    <span className="rounded-full bg-zinc-900 px-3 py-1 text-xs text-white font-medium">
+                    <span
+                      style={{
+                        padding: "4px 12px",
+                        borderRadius: 999,
+                        fontSize: 11,
+                        letterSpacing: "0.08em",
+                        textTransform: "uppercase",
+                        color: "var(--ink)",
+                        border: "1px solid rgba(245,245,245,0.15)",
+                      }}
+                    >
                       {rating}
                     </span>
                   )}
@@ -164,50 +215,105 @@ export default function ReferencesPage() {
               </div>
 
               {/* Pull quote */}
-              <div className="px-8 py-6 border-b border-zinc-100">
-                <blockquote className="pl-5 border-l-2 border-zinc-300">
-                  <p className="text-zinc-700 leading-relaxed italic text-sm sm:text-base">
+              <div style={{ padding: "28px 32px", borderBottom: "1px solid var(--hair)" }}>
+                <blockquote
+                  style={{
+                    paddingLeft: 20,
+                    borderLeft: "2px solid var(--purple)",
+                    margin: 0,
+                  }}
+                >
+                  <p
+                    className="font-display"
+                    style={{
+                      fontSize: 18,
+                      fontStyle: "italic",
+                      color: "var(--ink)",
+                      lineHeight: 1.6,
+                      letterSpacing: "-0.01em",
+                    }}
+                  >
                     &ldquo;{pullQuote}&rdquo;
                   </p>
                 </blockquote>
               </div>
 
               {/* Strengths */}
-              <div className="px-8 py-6 border-b border-zinc-100">
-                <p className="text-xs font-medium uppercase tracking-wide text-zinc-400 mb-3">
+              <div style={{ padding: "24px 32px", borderBottom: "1px solid var(--hair)" }}>
+                <p
+                  style={{
+                    fontSize: 11,
+                    letterSpacing: "0.16em",
+                    textTransform: "uppercase",
+                    color: "var(--faint)",
+                    marginBottom: 14,
+                    fontFamily: "var(--font-sans)",
+                  }}
+                >
                   Key Strengths
                 </p>
-                <ul className="space-y-2">
+                <ul style={{ display: "flex", flexDirection: "column", gap: 10 }}>
                   {strengths.map((s, i) => (
-                    <li key={i} className="flex gap-3 text-sm text-zinc-600 leading-relaxed">
-                      <span className="text-zinc-300 mt-0.5 shrink-0">›</span>
+                    <li
+                      key={i}
+                      style={{ display: "flex", gap: 10, fontSize: 15, color: "var(--muted)", lineHeight: 1.6 }}
+                    >
+                      <span style={{ color: "var(--faint)", flexShrink: 0, marginTop: 2 }}>›</span>
                       {s}
                     </li>
                   ))}
                 </ul>
               </div>
 
-              {/* Areas for growth — only shown when provided */}
+              {/* Areas for growth — conditional */}
               {improvement && (
-                <div className="px-8 py-5 border-b border-zinc-100 bg-zinc-50">
-                  <p className="text-xs font-medium uppercase tracking-wide text-zinc-400 mb-2">
+                <div
+                  style={{
+                    padding: "20px 32px",
+                    borderBottom: "1px solid var(--hair)",
+                    background: "var(--bg-raised)",
+                  }}
+                >
+                  <p
+                    style={{
+                      fontSize: 11,
+                      letterSpacing: "0.16em",
+                      textTransform: "uppercase",
+                      color: "var(--faint)",
+                      marginBottom: 10,
+                      fontFamily: "var(--font-sans)",
+                    }}
+                  >
                     Areas for Growth
                   </p>
-                  <p className="text-sm text-zinc-600 leading-relaxed italic">{improvement}</p>
+                  <p style={{ fontSize: 15, color: "var(--muted)", lineHeight: 1.65, fontStyle: "italic" }}>
+                    {improvement}
+                  </p>
                 </div>
               )}
 
               {/* Full remarks */}
-              <div className="px-8 py-6 space-y-4">
-                <p className="text-xs font-medium uppercase tracking-wide text-zinc-400 mb-1">
+              <div style={{ padding: "24px 32px" }}>
+                <p
+                  style={{
+                    fontSize: 11,
+                    letterSpacing: "0.16em",
+                    textTransform: "uppercase",
+                    color: "var(--faint)",
+                    marginBottom: 14,
+                    fontFamily: "var(--font-sans)",
+                  }}
+                >
                   Full Remarks
                 </p>
-                {remarks.map((para, i) => (
-                  <p key={i} className="text-sm text-zinc-600 leading-relaxed">
-                    {para}
-                  </p>
-                ))}
-                <p className="text-sm text-zinc-400 pt-2">— {closing}</p>
+                <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
+                  {remarks.map((para, i) => (
+                    <p key={i} style={{ fontSize: 15, color: "var(--muted)", lineHeight: 1.7, letterSpacing: "-0.005em" }}>
+                      {para}
+                    </p>
+                  ))}
+                  <p style={{ fontSize: 13, color: "var(--faint)", paddingTop: 8 }}>— {closing}</p>
+                </div>
               </div>
 
             </article>
