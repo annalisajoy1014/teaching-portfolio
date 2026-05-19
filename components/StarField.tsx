@@ -58,30 +58,47 @@ export default function StarField() {
     }
 
     function scheduleNext(now: number) {
-      nextShootTime = now + (45 + Math.random() * 75) * 1000; // 45–120 s
+      nextShootTime = now + (30 + Math.random() * 60) * 1000; // 30–90 s
     }
 
     function spawnShootingStar(now: number) {
       const w = canvas!.width;
       const h = canvas!.height;
 
-      // Start along top edge or upper-left portion of left edge
-      const fromTop = Math.random() > 0.35;
-      const startX = fromTop ? Math.random() * w * 0.65 : 0;
-      const startY = fromTop ? 0 : Math.random() * h * 0.45;
-
-      // Angle 20–40° below horizontal → travels right and slightly down
+      // Angle 20–40° below horizontal
       const angle = (20 + Math.random() * 20) * (Math.PI / 180);
 
-      // Travel 50–75% of screen width over 1.0–1.4 s
-      const travelDist = w * (0.5 + Math.random() * 0.25);
-      const duration   = 1000 + Math.random() * 400;
+      // Randomly pick one of two directions
+      const goRight = Math.random() > 0.5;
+
+      let startX: number, startY: number;
+      let dx: number, dy: number;
+
+      if (goRight) {
+        // From top edge (left portion) or upper-left edge → right and slightly down
+        const fromTop = Math.random() > 0.35;
+        startX = fromTop ? Math.random() * w * 0.65 : 0;
+        startY = fromTop ? 0 : Math.random() * h * 0.45;
+        dx =  Math.cos(angle);
+        dy =  Math.sin(angle);
+      } else {
+        // From top edge (right portion) or upper-right edge → left and slightly down
+        const fromTop = Math.random() > 0.35;
+        startX = fromTop ? w * 0.35 + Math.random() * w * 0.65 : w;
+        startY = fromTop ? 0 : Math.random() * h * 0.45;
+        dx = -Math.cos(angle);
+        dy =  Math.sin(angle);
+      }
+
+      // Travel 75–85% of screen width over 2.1–2.8 s
+      const travelDist = w * (0.75 + Math.random() * 0.10);
+      const duration   = 2100 + Math.random() * 700;
 
       shootingStar = {
         startX,
         startY,
-        dx: Math.cos(angle),
-        dy: Math.sin(angle),
+        dx,
+        dy,
         speed: travelDist / duration,
         trailLength: travelDist * (0.14 + Math.random() * 0.06),
         startTime: now,
